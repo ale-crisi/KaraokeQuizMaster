@@ -1,4 +1,4 @@
-package at.ac.hcw.kqm;
+package at.ac.hcw.kqm.app;
 
 public class AppMain {
     public static void main(String[] args) {
