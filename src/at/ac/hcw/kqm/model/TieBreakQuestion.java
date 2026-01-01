@@ -1,4 +1,4 @@
 package at.ac.hcw.kqm.model;
 
-public class TieBreakQuestion {
+public class TieBreakQuestion extends Question{
 }
