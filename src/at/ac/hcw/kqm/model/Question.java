@@ -40,6 +40,9 @@ public class Question {
         this.hint = hint;
     }
 
+    public Question() {
+    }
+
     // Getters and Setters
     public int getId() {
         return id;
@@ -131,5 +134,9 @@ public class Question {
                 ", answerOptions=" + answerOptions.size() +
                 ", correctOptionId=" + correctOptionId +
                 '}';
+    }
+
+    public boolean isCorrect(int selectedOptionId) {
+        return false;
     }
 }
