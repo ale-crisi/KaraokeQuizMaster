@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'at.ac.hcw.kqm'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+javafx {
+    version = '21'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+}
+
+dependencies {
+}
+
+application {
+    mainClass = 'at.ac.hcw.kqm.app.AppMain'
+}
+
+tasks.named('run') {
+    standardInput = System.in
+}
