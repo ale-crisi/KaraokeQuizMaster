@@ -134,7 +134,7 @@ public class InMemoryQuestionRepository implements QuestionRepository {
         q3_4.addAnswerOption(new AnswerOption(4, "Throwing a party"));
         questions.add(q3_4);
 
-        // ========== SONG 4: Bohemian Rhapsody by Queen ==========
+        // ========== SONG 4: Bohemian Rhapsody by Queen =========
         Question q4_1 = new Question(13, 4, "In which year was 'Bohemian Rhapsody' released?", 3, "It was the mid-1970s.");
         q4_1.addAnswerOption(new AnswerOption(1, "1973"));
         q4_1.addAnswerOption(new AnswerOption(2, "1974"));
