@@ -1,5 +1,8 @@
 package at.ac.hcw.kqm.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a song in the Karaoke Quiz Master game.
  * Each song has an ID, title, artist, and availability status.
@@ -9,8 +12,9 @@ public class Song {
     private String title;
     private String artist;
     private boolean isAvailable;  // Whether the song is unlocked/available
-    private String lyrics;  // Song lyrics for karaoke mode (optional)
-    private String audioFilePath;  // Path to audio file (optional, for preview/karaoke)
+    private List<LyricLine> lyrics;  // Song lyrics with timing for karaoke mode (optional)
+    private String audioFilePath;  // Path to audio file
+    private String lyricsFilePath;  // Path to LRC lyrics file
 
     /**
      * Constructor to create a new song.
@@ -19,8 +23,8 @@ public class Song {
         this.id = id;
         this.title = title;
         this.artist = artist;
-        this.isAvailable = true;  // Default: all songs are available
-        this.lyrics = "";
+        this.isAvailable = true;
+        this.lyrics = new ArrayList<>();
         this.audioFilePath = "";
     }
 
@@ -37,7 +41,7 @@ public class Song {
         this.title = title;
         this.artist = artist;
         this.isAvailable = isAvailable;
-        this.lyrics = "";
+        this.lyrics = new ArrayList<>();
         this.audioFilePath = "";
     }
 
@@ -74,12 +78,16 @@ public class Song {
         isAvailable = available;
     }
 
-    public String getLyrics() {
+    public List<LyricLine> getLyrics() {
         return lyrics;
     }
 
-    public void setLyrics(String lyrics) {
+    public void setLyrics(List<LyricLine> lyrics) {
         this.lyrics = lyrics;
+    }
+
+    public void addLyricLine(long startTime, String text) {
+        this.lyrics.add(new LyricLine(startTime, text));
     }
 
     public String getAudioFilePath() {
@@ -88,6 +96,14 @@ public class Song {
 
     public void setAudioFilePath(String audioFilePath) {
         this.audioFilePath = audioFilePath;
+    }
+
+    public String getLyricsFilePath() {
+        return lyricsFilePath;
+    }
+
+    public void setLyricsFilePath(String lyricsFilePath) {
+        this.lyricsFilePath = lyricsFilePath;
     }
 
     /**

@@ -6,34 +6,36 @@ import java.util.stream.Collectors;
 
 import at.ac.hcw.kqm.model.Song;
 
-/**
- * In-memory implementation of SongRepository.
- * Stores karaoke songs that players can choose from.
- * Each song will have multiple quiz questions associated with it.
- *
- * DATA: Contains 15 karaoke songs (10 English, 5 German)
- */
+
 public class InMemorySongRepository implements SongRepository {
 
     private List<Song> songs;
 
-    /**
-     * Constructor that initializes the repository with karaoke songs.
-     */
+
     public InMemorySongRepository() {
         this.songs = new ArrayList<>();
         initializeSongs();
     }
 
-    /**
-     * Initializes the repository with popular karaoke songs.
-     * Some songs are marked as locked/unavailable for game progression.
-     */
+
     private void initializeSongs() {
-        // Popular English karaoke songs (all available)
-        songs.add(new Song(1, "Simarik", "Tarkan", true));
-        songs.add(new Song(2, "It's My Life", "Bon Jovi", true));
-        songs.add(new Song(3, "Hit Me Baby One More Time", "Britney Spears", true));
+        LrcLyricLoader loader = new LrcLyricLoader();
+
+        Song s1 = new Song(1, "Simarik", "Tarkan", true);
+        songs.add(s1);
+
+        Song s2 = new Song(2, "It's My Life", "Bon Jovi", true);
+        s2.setAudioFilePath("/at/ac/hcw/kqm/ui/fxml/assets/audio/Bon Jovi - It's My Life.mpeg");
+        s2.setLyricsFilePath("/at/ac/hcw/kqm/ui/fxml/assets/lyrics/Bon Jovi - It's My Life.lrc");
+        applyLyricsFromLrc(s2, loader);
+        songs.add(s2);
+
+        Song s3 = new Song(3, "Hit Me Baby One More Time", "Britney Spears", true);
+        s3.setAudioFilePath("/at/ac/hcw/kqm/ui/fxml/assets/audio/Britney Spears - ... Baby One More Time.mpeg");
+        s3.setLyricsFilePath("/at/ac/hcw/kqm/ui/fxml/assets/lyrics/Britney Spears - Hit Me Baby One More Time.lrc");
+        applyLyricsFromLrc(s3, loader);
+        songs.add(s3);
+
         songs.add(new Song(4, "Rolling in the Deep", "Adele", true));
         songs.add(new Song(5, "Blinding Lights", "The Weeknd", true));
         songs.add(new Song(6, "Imagine", "John Lennon", true));
@@ -42,12 +44,34 @@ public class InMemorySongRepository implements SongRepository {
         songs.add(new Song(9, "Don't Stop Believin'", "Journey", true));
         songs.add(new Song(10, "Sweet Child O' Mine", "Guns N' Roses", true));
 
-        // German karaoke favorites (some locked for progression)
-        songs.add(new Song(11, "99 Luftballons", "Nena", true));
-        songs.add(new Song(12, "Atemlos durch die Nacht", "Helene Fischer", false)); // Locked
-        songs.add(new Song(13, "Major Tom", "Peter Schilling", false)); // Locked
-        songs.add(new Song(14, "Du hast", "Rammstein", false)); // Locked
-        songs.add(new Song(15, "Astronaut", "Sido feat. Andreas Bourani", false)); // Locked
+    }
+
+    /**
+     * Loads lyrics from LRC file and applies them to the song.
+     *
+     * @param song Song to populate with lyrics
+     * @param loader LRC loader instance
+     */
+    private void applyLyricsFromLrc(Song song, LrcLyricLoader loader) {
+        try {
+            String lrcPath = song.getLyricsFilePath();
+            if (lrcPath == null || lrcPath.isBlank()) {
+                return;
+            }
+
+            List<LrcLyricLoader.TimedLine> lines = loader.loadFromClasspath(lrcPath);
+            for (LrcLyricLoader.TimedLine tl : lines) {
+                song.addLyricLine(tl.timeMs, tl.text);
+            }
+
+            System.out.println("✓ Lyrics loaded successfully");
+            System.out.println("  Song: " + song.getDisplayName());
+            System.out.println("  Lines: " + lines.size());
+        } catch (Exception e) {
+            System.err.println("✗ Failed to load lyrics");
+            System.err.println("  Song: " + song.getDisplayName());
+            System.err.println("  Error: " + e.getMessage());
+        }
     }
 
     @Override
@@ -79,7 +103,7 @@ public class InMemorySongRepository implements SongRepository {
 
     /**
      * Gets only available (unlocked) songs.
-     * 
+     *
      * @return List of available songs
      */
     public List<Song> getAvailableSongs() {
@@ -90,7 +114,7 @@ public class InMemorySongRepository implements SongRepository {
 
     /**
      * Gets only locked (unavailable) songs.
-     * 
+     *
      * @return List of locked songs
      */
     public List<Song> getLockedSongs() {
@@ -101,7 +125,7 @@ public class InMemorySongRepository implements SongRepository {
 
     /**
      * Unlocks a song by ID.
-     * 
+     *
      * @param songId The ID of the song to unlock
      * @return true if song was found and unlocked
      */

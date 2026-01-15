@@ -82,7 +82,6 @@
     -fx-prompt-text-fill: #8899aa;
 }
 
-
 /* Player Input Fields (larger for start screen) */
 .player-input {
     -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
@@ -106,7 +105,6 @@
 .player-input {
     -fx-prompt-text-fill: #7a8a9a;
 }
-
 
 /* Transparent Input Fields for background image */
 .transparent-input {
@@ -159,6 +157,60 @@
 }
 
 
+/* Karaoke Lyrics Label */
+.karaoke-lyrics {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 2);
+}
+
+/* Karaoke Multi-Line Display */
+.karaoke-line-previous,
+.karaoke-line-next {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 8, 0.4, 0, 2);
+}
+
+.karaoke-line-current {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 12, 0.6, 0, 3);
+}
+
+.karaoke-line-gold {
+    -fx-background-color: transparent;
+    -fx-text-fill: linear-gradient(to right, #C68A24, #8B5A2B);
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 16, 0.75, 0, 3);
+}
+
+.karaoke-song-title {
+    -fx-text-fill: #f3e9d2;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.85), 14, 0.7, 0, 3);
+    -fx-padding: 0 0 8px 0;
+}
+
 /* Transparent Button for background image */
 .transparent-button {
     -fx-background-color: transparent;
@@ -166,16 +218,20 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-font-weight: bold;
+    -fx-font-size: 14px;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.5, 0, 2);
 }
 .transparent-button:hover {
     -fx-background-color: transparent;
-    -fx-text-fill: #ffff99;
+    -fx-text-fill: #ffd700;
     -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 10, 0.7, 0, 3);
 }
 .transparent-button:pressed {
     -fx-background-color: transparent;
-    -fx-text-fill: #ffff66;
+    -fx-text-fill: #ffed4e;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 8, 0.6, 0, 2);
 }
 
 /* Song selection bars */
@@ -320,4 +376,3 @@
     -fx-font-style: italic;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
-

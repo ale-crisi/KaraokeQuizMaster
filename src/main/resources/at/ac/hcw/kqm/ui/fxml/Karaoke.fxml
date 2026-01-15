@@ -4,51 +4,52 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.kqm.ui.controller.KaraokeController" styleClass="screen" stylesheets="@styles.css">
 
-   <top>
-      <VBox style="-fx-background-color: #0052CC;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <Label text="Karaoke - Singe deinen Song!" textFill="WHITE">
-            <font>
-               <Font size="28.0" />
-            </font>
-         </Label>
-         <Label fx:id="playerLabel" text="Spieler: Player 1" textFill="WHITE">
-            <font>
-               <Font size="18.0" />
-            </font>
-         </Label>
-         <Label fx:id="songLabel" text="Song: Song Title" textFill="WHITE">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Label>
-      </VBox>
-   </top>
    <center>
-      <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #1a1a1a;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-         <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" />
-      </VBox>
+      <StackPane style="-fx-background-image: url('file:///C:/Users/acmat/IdeaProjects/KaraokeQuizMaster/src/main/resources/at/ac/hcw/kqm/ui/fxml/assets/Karaoke.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
+
+         <!-- Song title heading - top left corner aligned with buttons -->
+         <VBox alignment="TOP_LEFT" translateY="95">
+            <padding>
+               <Insets top="20" left="20" />
+            </padding>
+            <Label fx:id="songTitleLabel" styleClass="karaoke-song-title" wrapText="true" alignment="TOP_LEFT" maxWidth="400" />
+         </VBox>
+
+         <!-- Karaoke Lyrics Display (3 lines) - centered -->
+         <VBox fx:id="lyricsContainer" alignment="CENTER" spacing="12" maxWidth="900" translateY="-75">
+            <padding>
+               <Insets bottom="20" left="40" right="40" top="30" />
+            </padding>
+
+            <!-- Previous line (dimmed) -->
+            <Label fx:id="lyricsPrevious" styleClass="karaoke-line-previous" wrapText="true" alignment="CENTER" />
+
+            <!-- Current line with gold effect -->
+            <StackPane fx:id="currentLineContainer">
+               <Label fx:id="lyricsCurrent" styleClass="karaoke-line-current" wrapText="true" alignment="CENTER" />
+               <Label fx:id="lyricsCurrentGold" styleClass="karaoke-line-gold" wrapText="true" alignment="CENTER" />
+            </StackPane>
+
+            <!-- Next line (dimmed) -->
+            <Label fx:id="lyricsNext" styleClass="karaoke-line-next" wrapText="true" alignment="CENTER" />
+         </VBox>
+
+         <!-- Buttons at bottom center -->
+         <HBox alignment="BOTTOM_CENTER" spacing="15.0">
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Button fx:id="playButton" mnemonicParsing="false" text="Abspielen" styleClass="transparent-button" translateX="-142" />
+            <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" styleClass="transparent-button" translateX="-142" />
+            <Button fx:id="stopButton" mnemonicParsing="false" text="Stopp" styleClass="transparent-button" translateX="42" />
+            <Button fx:id="nextButton" mnemonicParsing="false" text="Nächster Spieler" styleClass="transparent-button" translateX="42" />
+         </HBox>
+      </StackPane>
    </center>
-   <bottom>
-      <VBox spacing="10.0" style="-fx-background-color: #0052CC;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <Button fx:id="playButton" mnemonicParsing="false" text="Abspielen" />
-         <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" />
-         <Button fx:id="stopButton" mnemonicParsing="false" text="Stopp" />
-         <Button fx:id="nextButton" mnemonicParsing="false" text="Nächster Spieler" />
-      </VBox>
-   </bottom>
 </BorderPane>
