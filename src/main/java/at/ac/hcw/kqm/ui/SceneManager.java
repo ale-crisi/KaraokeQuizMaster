@@ -9,13 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * Central navigation helper for switching between FXML-based views.
- *
- * Usage:
- * 1) Call SceneManager.init(primaryStage) once from your Application.start().
- * 2) Navigate with SceneManager.showStart() / showSongSelection() / ...
- */
+
 public class SceneManager {
 
 	private static SceneManager instance;
@@ -38,16 +32,16 @@ public class SceneManager {
 	}
 
 	public void showStart() {
-		loadAndShow("/at/ac/hcw/kqm/ui/fxml/Start.fxml", 900, 600, "Karaoke Quiz Master – Start");
+		loadAndShow("/at/ac/hcw/kqm/ui/fxml/Start.fxml", 1200, 800, "Karaoke Quiz Master – Start");
 	}
 
 	public void showSongSelection() {
-		loadAndShow("/at/ac/hcw/kqm/ui/fxml/SongSelection.fxml", 900, 600, "Song Auswahl");
+		loadAndShow("/at/ac/hcw/kqm/ui/fxml/SongSelection.fxml", 1200, 800, "Song Auswahl");
 	}
 
 	public void showQuiz() {
 		System.out.println("SceneManager.showQuiz() called");
-		loadAndShow("/at/ac/hcw/kqm/ui/fxml/Quiz.fxml", 900, 700, "Quiz");
+		loadAndShow("/at/ac/hcw/kqm/ui/fxml/Quiz.fxml", 1200, 800, "Quiz");
 		System.out.println("SceneManager.showQuiz() finished");
 	}
 
@@ -96,3 +90,4 @@ public class SceneManager {
 		return Objects.requireNonNull(url, "Resource not found: " + path);
 	}
 }
+

@@ -3,6 +3,14 @@
     -fx-background-color: linear-gradient(to bottom, #000000 0%, #0d0d0d 60%, #1a1a1a 100%);
 }
 
+/* Start Screen with background image */
+.root.start-screen {
+    -fx-background-image: url("assets/Start.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 /* Title logo style */
 .title-logo {
     -fx-text-fill: #ffffff;
@@ -70,8 +78,104 @@
     -fx-border-color: #ffed4e;
     -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0.6, 0, 2);
 }
-.text-field::placeholder {
-    -fx-text-fill: #8899aa;
+.text-field {
+    -fx-prompt-text-fill: #8899aa;
+}
+
+
+/* Player Input Fields (larger for start screen) */
+.player-input {
+    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #d4af37;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-padding: 12 18 12 18;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0.5, 0, 2);
+    -fx-background-radius: 12;
+    -fx-min-width: 300;
+    -fx-pref-width: 300;
+}
+.player-input:focused {
+    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+    -fx-border-color: #ffed4e;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 10, 0.7, 0, 3);
+}
+.player-input {
+    -fx-prompt-text-fill: #7a8a9a;
+}
+
+
+/* Transparent Input Fields for background image */
+.transparent-input {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-pref-width: 235;
+    -fx-min-width: 235;
+    -fx-control-inner-background: transparent;
+    -fx-alignment: center;
+}
+.transparent-input:focused {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+    -fx-control-inner-background: transparent;
+}
+.transparent-input {
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.95);
+}
+
+/* Transparent Input Fields for background image - left aligned */
+.transparent-input-left {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-pref-width: 235;
+    -fx-min-width: 235;
+    -fx-control-inner-background: transparent;
+    -fx-alignment: center;
+}
+.transparent-input-left:focused {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+    -fx-control-inner-background: transparent;
+}
+.transparent-input-left {
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.95);
+}
+
+
+/* Transparent Button for background image */
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+.transparent-button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffff99;
+    -fx-border-color: transparent;
+}
+.transparent-button:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffff66;
 }
 
 /* Song selection bars */
@@ -216,3 +320,4 @@
     -fx-font-style: italic;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
+

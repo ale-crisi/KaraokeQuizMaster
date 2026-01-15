@@ -9,14 +9,6 @@ import javafx.scene.control.TextField;
 public class StartController {
 
     @FXML
-    private Button player1Button;
-    @FXML
-    private Button player2Button;
-    @FXML
-    private Button player3Button;
-    @FXML
-    private Button player4Button;
-    @FXML
     private TextField player1Input;
     @FXML
     private TextField player2Input;
@@ -29,13 +21,11 @@ public class StartController {
 
     @FXML
     public void initialize() {
-        // Don't init default players yet - will be created based on input
 
-        // Set placeholder texts
-        player1Input.setPromptText("Name von Spieler 1");
-        player2Input.setPromptText("Name von Spieler 2");
-        player3Input.setPromptText("Name von Spieler 3");
-        player4Input.setPromptText("Name von Spieler 4");
+        player1Input.setPromptText("");
+        player2Input.setPromptText("");
+        player3Input.setPromptText("");
+        player4Input.setPromptText("");
 
         startButton.setOnAction(e -> {
             System.out.println("Starting game...");
@@ -75,12 +65,5 @@ public class StartController {
             SceneManager.get().showSongSelection();
         });
     }
-
-    private void updateNameFromInput(int idx, TextField input) {
-        // Not needed anymore - names are collected on start
-    }
-
-    private void updatePlayerButtons() {
-        // Not needed anymore - buttons removed or not used
-    }
 }
+
