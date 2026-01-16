@@ -22,6 +22,8 @@ public class QuizController {
     @FXML
     private Label playerInfoLabel;
     @FXML
+    private Label songInfoLabel;
+    @FXML
     private Button answerA, answerB, answerC, answerD;
     @FXML
     private Button replacementButton, fiftyFiftyButton, hintButton, submitButton;
@@ -94,8 +96,9 @@ public class QuizController {
             song = AppState.get().getSongForPlayer(players.get(playerIndex));
         }
         String songName = (song != null) ? song.getDisplayName() : "N/A";
-        int qNo = engine.getQuestionNumberForCurrentPlayer();
-        playerInfoLabel.setText(playerName + " | " + songName + " | Frage " + qNo + "/5");
+        // Show player (red/bold) and song (white) on separate labels
+        playerInfoLabel.setText(playerName);
+        songInfoLabel.setText(songName);
     }
 
     private void setAnswerButton(Button b, AnswerOption opt) {

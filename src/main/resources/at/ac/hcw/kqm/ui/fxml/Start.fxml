@@ -8,42 +8,46 @@
 
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.kqm.ui.controller.StartController" styleClass="start-screen" stylesheets="@styles.css">
-   <center>
-      <VBox alignment="CENTER" spacing="47.0">
-         <padding>
-            <Insets bottom="95.0" left="176.0" right="120.0" top="496.0" />
-         </padding>
-         <GridPane hgap="318.0" vgap="75.0" alignment="CENTER">
-            <columnConstraints>
-               <javafx.scene.layout.ColumnConstraints minWidth="235.0" prefWidth="235.0" />
-               <javafx.scene.layout.ColumnConstraints minWidth="235.0" prefWidth="235.0" />
-            </columnConstraints>
-            <rowConstraints>
-               <javafx.scene.layout.RowConstraints minHeight="42.0" />
-               <javafx.scene.layout.RowConstraints minHeight="42.0" />
-            </rowConstraints>
-            <TextField fx:id="player1Input" promptText="NAME" styleClass="transparent-input-left">
-               <GridPane.margin>
-                  <Insets top="38.0" left="38.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="player2Input" promptText="NAME" styleClass="transparent-input-left" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets top="38.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="player3Input" promptText="NAME" styleClass="transparent-input-left" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="38.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="player4Input" promptText="NAME" styleClass="transparent-input-left" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </GridPane>
-         <Button fx:id="startButton" mnemonicParsing="false" text="START" styleClass="transparent-button" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 10 50 10 50;">
-            <VBox.margin>
-               <Insets left="114.0" top="0.0" />
-            </VBox.margin>
-         </Button>
-      </VBox>
-   </center>
+    <center>
+        <VBox alignment="CENTER" spacing="47.0">
+            <padding>
+                <Insets bottom="95.0" left="176.0" right="120.0" top="496.0" />
+            </padding>
+            <GridPane hgap="318.0" vgap="75.0" alignment="CENTER">
+                <columnConstraints>
+                    <javafx.scene.layout.ColumnConstraints minWidth="235.0" prefWidth="235.0" />
+                    <javafx.scene.layout.ColumnConstraints minWidth="235.0" prefWidth="235.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <javafx.scene.layout.RowConstraints minHeight="42.0" />
+                    <javafx.scene.layout.RowConstraints minHeight="42.0" />
+                </rowConstraints>
+                <TextField fx:id="player1Input" promptText="NAME" styleClass="transparent-input-left">
+                    <GridPane.margin>
+                        <Insets top="52.0" left="38.0" />
+                    </GridPane.margin>
+                </TextField>
+                <TextField fx:id="player2Input" promptText="NAME" styleClass="transparent-input-left" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets top="52.0" />
+                    </GridPane.margin>
+                </TextField>
+                <TextField fx:id="player3Input" promptText="NAME" styleClass="transparent-input-left" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets top="-14.0" left="38.0" />
+                    </GridPane.margin>
+                </TextField>
+                <TextField fx:id="player4Input" promptText="NAME" styleClass="transparent-input-left" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets top="-14.0" />
+                    </GridPane.margin>
+                </TextField>
+            </GridPane>
+            <Button fx:id="startButton" mnemonicParsing="false" text="START" styleClass="transparent-button" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 10 50 10 50;" onAction="#startButtonClicked">
+                <VBox.margin>
+                    <Insets left="56.0" top="0.0" />
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </center>
 </BorderPane>

@@ -27,6 +27,12 @@ public class SongSelectionController {
         try {
             topTen = AppState.get().getTopTenSongs();
             System.out.println("Loaded " + topTen.size() + " songs");
+            System.out.println("[DEBUG] --- SongSelectionController.initialize ---");
+            System.out.println("[DEBUG] Aktueller Spieler-Index: " + AppState.get().getPlayers().indexOf(AppState.get().getCurrentSelectionPlayer()));
+            System.out.println("[DEBUG] Aktueller Spieler-Name: " + AppState.get().getCurrentSelectionPlayer().getName());
+            System.out.println("[DEBUG] currentSelectionPlayerIndex: " + getCurrentSelectionPlayerIndex());
+            System.out.println("[DEBUG] Alle Spielernamen: " + AppState.get().getPlayers().stream().map(p -> p.getName()).toList());
+            System.out.println("[DEBUG] Anzahl ausgewählter Songs: " + AppState.get().getSelectedSongs().size());
 
             // Set button labels
             setButton(song1Button, 0);
@@ -71,19 +77,20 @@ public class SongSelectionController {
 
     private void setButton(Button b, int idx) {
         Song s = topTen.get(idx);
-        b.setText(s.getDisplayName());
+        b.setText(s.getTitle());
         b.setOnAction(e -> {
             System.out.println("Song button clicked: " + s.getDisplayName() + " (index: " + idx + ")");
             selectedIndex = idx;
             System.out.println("Selected index set to: " + selectedIndex);
-            selectButton.setDisable(false);
             // Visuelles Feedback
             highlightSelectedButton(b);
+            // Automatisch Auswahl abschließen und zum nächsten Spieler wechseln
+            onSelect();
         });
     }
 
     private void updateCurrentPlayerLabel() {
-        currentPlayerLabel.setText("Aktueller Spieler: " + AppState.get().getCurrentSelectionPlayer().getName());
+        currentPlayerLabel.setText(AppState.get().getCurrentSelectionPlayer().getName());
     }
 
     private void updateSelectButtonText() {
@@ -119,6 +126,11 @@ public class SongSelectionController {
     private void onSelect() {
         System.out.println("=== onSelect called ===");
         System.out.println("selectedIndex: " + selectedIndex);
+        System.out.println("[DEBUG] --- SongSelectionController.onSelect ---");
+        System.out.println("[DEBUG] Aktueller Spieler-Index: " + AppState.get().getPlayers().indexOf(AppState.get().getCurrentSelectionPlayer()));
+        System.out.println("[DEBUG] Aktueller Spieler-Name: " + AppState.get().getCurrentSelectionPlayer().getName());
+        System.out.println("[DEBUG] currentSelectionPlayerIndex: " + getCurrentSelectionPlayerIndex());
+        System.out.println("[DEBUG] Anzahl ausgewählter Songs: " + AppState.get().getSelectedSongs().size());
         if (selectedIndex < 0) {
             System.out.println("No song selected");
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
@@ -144,6 +156,10 @@ public class SongSelectionController {
             selectButton.setDisable(true);
 
             boolean finished = AppState.get().advanceSelectionPlayer();
+            System.out.println("[DEBUG] Nach advanceSelectionPlayer():");
+            System.out.println("[DEBUG] Aktueller Spieler-Index: " + AppState.get().getPlayers().indexOf(AppState.get().getCurrentSelectionPlayer()));
+            System.out.println("[DEBUG] Aktueller Spieler-Name: " + AppState.get().getCurrentSelectionPlayer().getName());
+            System.out.println("[DEBUG] currentSelectionPlayerIndex: " + getCurrentSelectionPlayerIndex());
             System.out.println("finished: " + finished);
             System.out.println("Selected songs count: " + AppState.get().getSelectedSongs().size());
             if (finished) {
@@ -158,22 +174,10 @@ public class SongSelectionController {
                 SceneManager.get().showQuiz();
                 System.out.println("showQuiz() completed");
             } else {
-                System.out.println("Next player...");
-                // Alle Buttons zurücksetzen
-                song1Button.setStyle("");
-                song2Button.setStyle("");
-                song3Button.setStyle("");
-                song4Button.setStyle("");
-                song5Button.setStyle("");
-                song6Button.setStyle("");
-                song7Button.setStyle("");
-                song8Button.setStyle("");
-                song9Button.setStyle("");
-                song10Button.setStyle("");
-                // Keep already selected songs disabled
-                refreshDisabledSongs();
-                updateCurrentPlayerLabel();
-                updateSelectButtonText();
+                // Nur für den nächsten Spieler erneut SongSelection anzeigen
+                if (AppState.get().getSelectedSongs().size() < AppState.get().getPlayers().size()) {
+                    SceneManager.get().showSongSelection();
+                }
             }
         } catch (Exception ex) {
             System.err.println("Error in onSelect: " + ex.getMessage());
@@ -181,20 +185,22 @@ public class SongSelectionController {
         }
     }
 
+    // (nur eine Definition am Ende der Klasse belassen)
+
     private Button buttonByIndex(int idx) {
-        return switch (idx) {
-            case 0 -> song1Button;
-            case 1 -> song2Button;
-            case 2 -> song3Button;
-            case 3 -> song4Button;
-            case 4 -> song5Button;
-            case 5 -> song6Button;
-            case 6 -> song7Button;
-            case 7 -> song8Button;
-            case 8 -> song9Button;
-            case 9 -> song10Button;
-            default -> null;
-        };
+        switch (idx) {
+            case 0: return song1Button;
+            case 1: return song2Button;
+            case 2: return song3Button;
+            case 3: return song4Button;
+            case 4: return song5Button;
+            case 5: return song6Button;
+            case 6: return song7Button;
+            case 7: return song8Button;
+            case 8: return song9Button;
+            case 9: return song10Button;
+            default: return null;
+        }
     }
 
     private void refreshDisabledSongs() {
@@ -208,6 +214,18 @@ public class SongSelectionController {
                 b.setDisable(true);
                 b.setStyle(b.getStyle() + "; -fx-opacity: 0.6;");
             }
+        }
+    }
+
+    // Hilfsmethode für Debugging
+    private int getCurrentSelectionPlayerIndex() {
+        try {
+            java.lang.reflect.Field f = AppState.get().getClass().getDeclaredField("currentSelectionPlayerIndex");
+            f.setAccessible(true);
+            return f.getInt(AppState.get());
+        } catch (Exception e) {
+            System.out.println("[DEBUG] Fehler beim Zugriff auf currentSelectionPlayerIndex: " + e.getMessage());
+            return -1;
         }
     }
 }

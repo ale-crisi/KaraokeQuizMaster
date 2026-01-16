@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 public class StartController {
 
     @FXML
@@ -21,49 +24,50 @@ public class StartController {
 
     @FXML
     public void initialize() {
-
         player1Input.setPromptText("");
         player2Input.setPromptText("");
         player3Input.setPromptText("");
         player4Input.setPromptText("");
+    }
 
-        startButton.setOnAction(e -> {
-            System.out.println("Starting game...");
+    @FXML
+    private void startButtonClicked() {
+        System.out.println("Starting game...");
 
-            // Collect only non-empty player names
-            java.util.List<String> playerNames = new java.util.ArrayList<>();
-            String name1 = player1Input.getText().trim();
-            String name2 = player2Input.getText().trim();
-            String name3 = player3Input.getText().trim();
-            String name4 = player4Input.getText().trim();
+        // Collect only non-empty player names
+        java.util.List<String> playerNames = new java.util.ArrayList<>();
+        String name1 = player1Input.getText().trim();
+        String name2 = player2Input.getText().trim();
+        String name3 = player3Input.getText().trim();
+        String name4 = player4Input.getText().trim();
 
-            if (!name1.isEmpty())
-                playerNames.add(name1);
-            if (!name2.isEmpty())
-                playerNames.add(name2);
-            if (!name3.isEmpty())
-                playerNames.add(name3);
-            if (!name4.isEmpty())
-                playerNames.add(name4);
+        if (!name1.isEmpty())
+            playerNames.add(name1);
+        if (!name2.isEmpty())
+            playerNames.add(name2);
+        if (!name3.isEmpty())
+            playerNames.add(name3);
+        if (!name4.isEmpty())
+            playerNames.add(name4);
 
-            // Require at least 1 player
-            if (playerNames.size() < 1) {
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-                        javafx.scene.control.Alert.AlertType.WARNING);
-                alert.setTitle("Zu wenig Spieler");
-                alert.setHeaderText("Mindestens 1 Spieler erforderlich");
-                alert.setContentText("Bitte gib mindestens 1 Spielernamen ein!");
-                alert.showAndWait();
-                return;
-            }
+        // Require at least 1 player
+        if (playerNames.size() < 1) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                    javafx.scene.control.Alert.AlertType.WARNING);
+            alert.setTitle("Zu wenig Spieler");
+            alert.setHeaderText("Mindestens 1 Spieler erforderlich");
+            alert.setContentText("Bitte gib mindestens 1 Spielernamen ein!");
+            alert.showAndWait();
+            return;
+        }
 
-            // Initialize players with entered names
+        // Initialize players only if not already initialized
+        if (AppState.get().getPlayers().isEmpty()) {
             AppState.get().initPlayersWithNames(playerNames);
-            AppState.get().resetSelectionFlow();
+        }
 
-            System.out.println("Game starting with " + playerNames.size() + " players");
-            SceneManager.get().showSongSelection();
-        });
+        System.out.println("Game starting with " + playerNames.size() + " players");
+        // Zuerst JokerRules für 8 Sekunden anzeigen, dann zur SongSelection
+        SceneManager.get().showJokerRules();
     }
 }
-

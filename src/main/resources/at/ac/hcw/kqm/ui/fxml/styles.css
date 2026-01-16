@@ -1,3 +1,10 @@
+/* Joker Rules Screen with background image */
+.root.joker-rules-screen {
+    -fx-background-image: url("assets/JokerRules.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
 /* Global dark theme */
 .root.screen {
     -fx-background-color: linear-gradient(to bottom, #000000 0%, #0d0d0d 60%, #1a1a1a 100%);
@@ -6,6 +13,14 @@
 /* Start Screen with background image */
 .root.start-screen {
     -fx-background-image: url("assets/Start.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+/* Song Selection Screen with background image */
+.root.song-selection-screen {
+    -fx-background-image: url("assets/songauswahl.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -82,6 +97,7 @@
     -fx-prompt-text-fill: #8899aa;
 }
 
+
 /* Player Input Fields (larger for start screen) */
 .player-input {
     -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
@@ -105,6 +121,7 @@
 .player-input {
     -fx-prompt-text-fill: #7a8a9a;
 }
+
 
 /* Transparent Input Fields for background image */
 .transparent-input {
@@ -157,60 +174,6 @@
 }
 
 
-/* Karaoke Lyrics Label */
-.karaoke-lyrics {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 28px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-text-alignment: center;
-    -fx-padding: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 2);
-}
-
-/* Karaoke Multi-Line Display */
-.karaoke-line-previous,
-.karaoke-line-next {
-    -fx-background-color: transparent;
-    -fx-text-fill: rgba(255, 255, 255, 0.5);
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 8, 0.4, 0, 2);
-}
-
-.karaoke-line-current {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 32px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 12, 0.6, 0, 3);
-}
-
-.karaoke-line-gold {
-    -fx-background-color: transparent;
-    -fx-text-fill: linear-gradient(to right, #C68A24, #8B5A2B);
-    -fx-font-size: 32px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 16, 0.75, 0, 3);
-}
-
-.karaoke-song-title {
-    -fx-text-fill: #f3e9d2;
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.85), 14, 0.7, 0, 3);
-    -fx-padding: 0 0 8px 0;
-}
-
 /* Transparent Button for background image */
 .transparent-button {
     -fx-background-color: transparent;
@@ -218,20 +181,19 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.5, 0, 2);
+    -fx-font-size: 20px;
+    -fx-font-family: "Segoe UI Black", "Segoe UI", "Arial", sans-serif;
+    -fx-padding: 10 50 10 50;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0.6, 0, 3);
 }
 .transparent-button:hover {
     -fx-background-color: transparent;
-    -fx-text-fill: #ffd700;
+    -fx-text-fill: #ffff99;
     -fx-border-color: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 10, 0.7, 0, 3);
 }
 .transparent-button:pressed {
     -fx-background-color: transparent;
-    -fx-text-fill: #ffed4e;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 8, 0.6, 0, 2);
+    -fx-text-fill: #ffff66;
 }
 
 /* Song selection bars */
@@ -270,72 +232,137 @@
     -fx-font-family: "Arial", sans-serif;
 }
 .answer-bar {
-    -fx-background-color: linear-gradient(to bottom, #2a2a2a, #1e1e1e);
+    -fx-background-color: transparent;
     -fx-text-fill: #f0f0f0;
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-font-weight: 500;
     -fx-background-radius: 10;
     -fx-padding: 12 18 12 18;
-    -fx-border-color: #555555;
-    -fx-border-width: 1;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
     -fx-border-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0.4, 0, 1);
+    -fx-effect: none;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 .answer-bar:hover {
-    -fx-background-color: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
-    -fx-border-color: #d4af37;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 6, 0.5, 0, 2);
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffcc;
+    -fx-border-color: transparent;
 }
 
 /* Joker cards */
 .joker-card {
-    -fx-background-color: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 100%);
-    -fx-text-fill: #f0f0f0;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-padding: 12 18 12 18;
-    -fx-background-radius: 10;
-    -fx-border-color: #d4af37;
-    -fx-border-width: 2;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
     -fx-border-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0.5, 0, 2);
+    -fx-effect: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-body-color: transparent;
+    -fx-shadow-highlight-color: transparent;
+    -fx-inner-border: transparent;
+    -fx-outer-border: transparent;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
-.joker-card:hover {
-    -fx-background-color: linear-gradient(to bottom, #3a3a3a 0%, #2a2a2a 100%);
-    -fx-border-color: #ffed4e;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.6), 10, 0.7, 0, 4);
+.joker-card:hover,
+.joker-card:focused,
+.joker-card:pressed,
+.joker-card:armed,
+.joker-card:default {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffcc;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 .joker-card-fill {
-    -fx-pref-width: 140;
-    -fx-pref-height: 200;
-    -fx-background-image: url("assets/joker_fill.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-text-fill: transparent;
+    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 10, 10, 10, 10;
+    -fx-background-image: none;
+    -fx-text-fill: #f0f0f0;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-padding: 12 18 12 18;
     -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+.joker-card-fill:hover,
+.joker-card-fill:focused,
+.joker-card-fill:pressed,
+.joker-card-fill:armed {
+    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 10, 10, 10, 10;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 .joker-card-fifty {
-    -fx-pref-width: 140;
-    -fx-pref-height: 200;
-    -fx-background-image: url("assets/joker_50.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-text-fill: transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-background-image: none;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 18 12 18;
     -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 10;
+    -fx-effect: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.joker-card-fifty:hover,
+.joker-card-fifty:focused,
+.joker-card-fifty:pressed,
+.joker-card-fifty:armed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffcc;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 .joker-card-hint {
-    -fx-pref-width: 140;
-    -fx-pref-height: 200;
-    -fx-background-image: url("assets/joker_hint.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-text-fill: transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-background-image: none;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 18 12 18;
     -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 10;
+    -fx-effect: none;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.joker-card-hint:hover,
+.joker-card-hint:focused,
+.joker-card-hint:pressed,
+.joker-card-hint:armed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffcc;
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }
 
 /* Used joker red mark */

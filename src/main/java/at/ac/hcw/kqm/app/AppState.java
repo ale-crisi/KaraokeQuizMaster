@@ -14,10 +14,7 @@ import at.ac.hcw.kqm.persistence.InMemorySongRepository;
 import at.ac.hcw.kqm.persistence.QuestionRepository;
 import at.ac.hcw.kqm.persistence.SongRepository;
 
-/**
- * Simple application-scoped state holder to share players, selections,
- * repositories and the game engine across controllers.
- */
+
 public class AppState {
 
     private static AppState INSTANCE;
@@ -75,7 +72,11 @@ public class AppState {
 
     public boolean advanceSelectionPlayer() {
         currentSelectionPlayerIndex++;
-        return currentSelectionPlayerIndex >= players.size();
+        if (currentSelectionPlayerIndex >= players.size()) {
+            currentSelectionPlayerIndex = players.size() - 1; // Bleibe beim letzten Spieler
+            return true;
+        }
+        return false;
     }
 
     public void resetSelectionFlow() {

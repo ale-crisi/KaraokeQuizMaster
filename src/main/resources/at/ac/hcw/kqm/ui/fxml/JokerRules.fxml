@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.kqm.ui.controller.JokerRulesController">
+    <ImageView fx:id="backgroundImage" fitWidth="1200" fitHeight="800" preserveRatio="false" />
+    <VBox alignment="CENTER" spacing="20.0">
+        <Label text="HINT" style="-fx-text-fill: white; -fx-font-size: 19px; -fx-font-weight: normal;" translateX="246" translateY="302" rotate="-25" />
+    </VBox>
+    <VBox alignment="CENTER" spacing="20.0">
+        <Label text="50 / 50" style="-fx-text-fill: white; -fx-font-size: 19px; -fx-font-weight: normal;" translateX="38" translateY="302" rotate="-25" />
+    </VBox>
+    <VBox alignment="CENTER" spacing="20.0">
+        <Label text="FILL &amp; JUMP" style="-fx-text-fill: white; -fx-font-size: 19px; -fx-font-weight: normal;" translateX="-208" translateY="302" rotate="-25" />
+    </VBox>
+    <VBox alignment="BOTTOM_CENTER" spacing="20.0">
+        <Button fx:id="skipButton" text="➔" onAction="#handleSkip" styleClass="transparent-button" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-font-size: 23px; -fx-padding: 15 40 15 40; -fx-text-fill: white;" translateX="510" translateY="-19" />
+    </VBox>
+</StackPane>
