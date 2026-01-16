@@ -36,25 +36,25 @@
                     <padding>
                         <Insets bottom="20.0" left="40.0" right="40.0" top="0.0" />
                     </padding>
-                    <VBox alignment="CENTER" spacing="6.0" translateY="-177.66">
-                        <Label text="Frage 1/5" styleClass="sub-title" translateX="-18.9" />
+                    <VBox alignment="CENTER" spacing="6.0" translateY="-83.66">
+                        <Label fx:id="questionNumberLabel" text="Frage 1/5" styleClass="sub-title" translateX="-18.9" />
                         <Label fx:id="questionLabel" text="Frage?" wrapText="true" styleClass="sub-title" maxWidth="Infinity" textAlignment="CENTER" alignment="CENTER" style="-fx-font-size: 22px; -fx-text-fill: #ffffff; -fx-background-color: rgba(0,0,0,0.5); -fx-padding: 10;" translateX="0" />
                     </VBox>
-                    <HBox spacing="40.0" alignment="CENTER" translateY="-132.3">
-                        <VBox spacing="18.0" alignment="CENTER_LEFT" translateX="-190.0">
+                    <HBox spacing="40.0" alignment="CENTER" translateY="-38.3">
+                        <VBox spacing="18.0" alignment="CENTER_LEFT" translateX="-114.0">
                             <HBox spacing="12.0" styleClass="answer-row" translateY="45.36">
-                                <Button fx:id="answerA" text="Antwortmöglichkeit A" styleClass="answer-bar" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="answerA" text="Antwortmöglichkeit A" styleClass="answer-bar" prefWidth="212" minWidth="212" maxWidth="212" prefHeight="14" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox spacing="12.0" styleClass="answer-row" translateY="98.28">
-                                <Button fx:id="answerB" text="Antwortmöglichkeit B" styleClass="answer-bar" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="answerB" text="Antwortmöglichkeit B" styleClass="answer-bar" prefWidth="212" minWidth="212" maxWidth="212" prefHeight="14" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </VBox>
-                        <VBox spacing="18.0" alignment="CENTER_LEFT" translateX="189.0">
+                        <VBox spacing="18.0" alignment="CENTER_LEFT" translateX="170.0">
                             <HBox spacing="12.0" styleClass="answer-row" translateY="45.36">
-                                <Button fx:id="answerC" text="Antwortmöglichkeit C" styleClass="answer-bar" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="answerC" text="Antwortmöglichkeit C" styleClass="answer-bar" prefWidth="212" minWidth="212" maxWidth="212" prefHeight="14" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox spacing="12.0" styleClass="answer-row" translateY="94.5">
-                                <Button fx:id="answerD" text="Antwortmöglichkeit D" styleClass="answer-bar" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="answerD" text="Antwortmöglichkeit D" styleClass="answer-bar" prefWidth="212" minWidth="212" maxWidth="212" prefHeight="14" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </VBox>
                     </HBox>
@@ -66,9 +66,27 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="0.0" />
                     </padding>
                     <HBox spacing="20.0" alignment="CENTER">
-                        <Button fx:id="replacementButton" text="FILL &amp; JUMP" styleClass="joker-card joker-card-fill" translateX="-302.4" />
-                        <Button fx:id="fiftyFiftyButton" text="50/50" styleClass="joker-card joker-card-fifty" translateX="-18.9" />
-                        <Button fx:id="hintButton" text="HINT" styleClass="joker-card joker-card-hint" translateX="113.4" />
+                        <Button fx:id="replacementButton" styleClass="joker-card joker-card-fill" translateX="-10.8" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
+                            <graphic>
+                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                    <Image url="@assets/JokerKing.png" />
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="fiftyFiftyButton" styleClass="joker-card joker-card-fifty" translateX="0" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
+                            <graphic>
+                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                    <Image url="@assets/JokerAss.png" />
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="hintButton" styleClass="joker-card joker-card-hint" translateX="22.6" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
+                            <graphic>
+                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                    <Image url="@assets/JokerHint.png" />
+                                </ImageView>
+                            </graphic>
+                        </Button>
                     </HBox>
                     <Button fx:id="submitButton" mnemonicParsing="false" text="Antwort abgeben" styleClass="gold-button" />
                 </VBox>
@@ -76,4 +94,5 @@
         </BorderPane>
     </children>
 </StackPane>
+
 

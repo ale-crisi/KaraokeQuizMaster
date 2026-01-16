@@ -26,6 +26,14 @@
     -fx-background-position: center;
 }
 
+/* Karaoke Screen with background image */
+.root.karaoke-screen {
+    -fx-background-image: url("assets/Karaoke.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 /* Title logo style */
 .title-logo {
     -fx-text-fill: #ffffff;
@@ -232,10 +240,10 @@
     -fx-font-family: "Arial", sans-serif;
 }
 .answer-bar {
-    -fx-background-color: transparent;
     -fx-text-fill: #f0f0f0;
     -fx-font-size: 16px;
     -fx-font-weight: 500;
+    -fx-background-color: transparent;
     -fx-background-radius: 10;
     -fx-padding: 12 18 12 18;
     -fx-border-color: transparent;
@@ -245,30 +253,49 @@
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 .answer-bar:hover {
-    -fx-background-color: transparent;
     -fx-text-fill: #ffffcc;
     -fx-border-color: transparent;
+}
+
+/* Answer bar for colored feedback */
+.answer-bar-colored {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-background-radius: 10;
+    -fx-padding: 12 18 12 18;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 10;
+    -fx-effect: none;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 
 /* Joker cards */
 .joker-card {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-background-radius: 10;
+    -fx-background-radius: 0;
     -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-padding: 12 18 12 18;
+    -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-border-radius: 10;
-    -fx-effect: none;
+    -fx-border: none;
+    -fx-border-radius: 0;
+    -fx-border-insets: 0;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.6), 15, 0.7, 0, 0);
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-focused-base-color: transparent;
     -fx-body-color: transparent;
     -fx-shadow-highlight-color: transparent;
     -fx-inner-border: transparent;
     -fx-outer-border: transparent;
+    -fx-focus-traversable: false;
+    -fx-control-inner-background: transparent;
+    -fx-background: transparent;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 .joker-card:hover,
@@ -278,82 +305,112 @@
 .joker-card:default {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-background-radius: 10;
+    -fx-background-radius: 0;
     -fx-text-fill: #ffffcc;
     -fx-border-color: transparent;
-    -fx-effect: none;
+    -fx-border-width: 0;
+    -fx-border: none;
+    -fx-border-radius: 0;
+    -fx-border-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.9), 20, 0.8, 0, 0);
 }
 
 .joker-card-fill {
-    -fx-background-color: transparent, transparent, transparent, transparent;
-    -fx-background-insets: 0, 1, 2, 3;
-    -fx-background-radius: 10, 10, 10, 10;
-    -fx-background-image: none;
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
+    -fx-background-image: none !important;
     -fx-text-fill: #f0f0f0;
     -fx-font-size: 16px;
     -fx-font-weight: 500;
-    -fx-padding: 12 18 12 18;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-effect: none;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+    -fx-padding: 0 !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-border: none !important;
+    -fx-border-radius: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.6), 15, 0.7, 0, 0);
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-focused-base-color: transparent !important;
+    -fx-focus-traversable: false;
+    -fx-control-inner-background: transparent !important;
+    -fx-background: transparent !important;
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 .joker-card-fill:hover,
 .joker-card-fill:focused,
 .joker-card-fill:pressed,
 .joker-card-fill:armed {
-    -fx-background-color: transparent, transparent, transparent, transparent;
-    -fx-background-insets: 0, 1, 2, 3;
-    -fx-background-radius: 10, 10, 10, 10;
-    -fx-border-color: transparent;
-    -fx-effect: none;
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-border: none !important;
+    -fx-border-insets: 0 !important;
+    -fx-focus-color: transparent !important;
+    -fx-control-inner-background: transparent !important;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.9), 20, 0.8, 0, 0);
 }
 
 .joker-card-fifty {
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-background-radius: 10;
-    -fx-background-image: none;
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
+    -fx-background-image: none !important;
     -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-padding: 12 18 12 18;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-radius: 10;
-    -fx-effect: none;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+    -fx-padding: 0 !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-border: none !important;
+    -fx-border-radius: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.6), 15, 0.7, 0, 0);
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-focused-base-color: transparent !important;
+    -fx-focus-traversable: false;
+    -fx-control-inner-background: transparent !important;
+    -fx-background: transparent !important;
 }
 .joker-card-fifty:hover,
 .joker-card-fifty:focused,
 .joker-card-fifty:pressed,
 .joker-card-fifty:armed {
-    -fx-background-color: transparent;
+    -fx-background-color: transparent !important;
     -fx-text-fill: #ffffcc;
-    -fx-border-color: transparent;
-    -fx-effect: none;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-border: none !important;
+    -fx-border-insets: 0 !important;
+    -fx-focus-color: transparent !important;
+    -fx-control-inner-background: transparent !important;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.9), 20, 0.8, 0, 0);
 }
 
 .joker-card-hint {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-background-radius: 10;
+    -fx-background-radius: 0;
     -fx-background-image: none;
     -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-padding: 12 18 12 18;
+    -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-border-radius: 10;
-    -fx-effect: none;
+    -fx-border-radius: 0;
+    -fx-border-insets: 0;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.6), 15, 0.7, 0, 0);
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-focused-base-color: transparent;
+    -fx-focus-traversable: false;
 }
 .joker-card-hint:hover,
 .joker-card-hint:focused,
@@ -362,7 +419,10 @@
     -fx-background-color: transparent;
     -fx-text-fill: #ffffcc;
     -fx-border-color: transparent;
-    -fx-effect: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(212, 175, 55, 0.9), 20, 0.8, 0, 0);
 }
 
 /* Used joker red mark */

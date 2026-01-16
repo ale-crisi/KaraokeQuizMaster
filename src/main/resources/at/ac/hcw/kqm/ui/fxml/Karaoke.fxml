@@ -8,48 +8,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.kqm.ui.controller.KaraokeController" styleClass="screen" stylesheets="@styles.css">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.hcw.kqm.ui.controller.KaraokeController" styleClass="karaoke-screen" stylesheets="@styles.css">
 
-   <center>
-      <StackPane style="-fx-background-image: url('file:///C:/Users/acmat/IdeaProjects/KaraokeQuizMaster/src/main/resources/at/ac/hcw/kqm/ui/fxml/assets/Karaoke.png'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
+    <center>
+        <StackPane>
 
-         <!-- Song title heading - top left corner aligned with buttons -->
-         <VBox alignment="TOP_LEFT" translateY="95">
-            <padding>
-               <Insets top="20" left="20" />
-            </padding>
-            <Label fx:id="songTitleLabel" styleClass="karaoke-song-title" wrapText="true" alignment="TOP_LEFT" maxWidth="400" />
-         </VBox>
+            <!-- Song title heading - top left corner aligned with buttons -->
+            <VBox alignment="TOP_LEFT" translateY="95">
+                <padding>
+                    <Insets top="20" left="20" />
+                </padding>
+                <Label fx:id="songTitleLabel" styleClass="karaoke-song-title" wrapText="true" alignment="TOP_LEFT" maxWidth="400" />
+            </VBox>
 
-         <!-- Karaoke Lyrics Display (3 lines) - centered -->
-         <VBox fx:id="lyricsContainer" alignment="CENTER" spacing="12" maxWidth="900" translateY="-75">
-            <padding>
-               <Insets bottom="20" left="40" right="40" top="30" />
-            </padding>
+            <!-- Karaoke Lyrics Display (3 lines) - centered -->
+            <VBox fx:id="lyricsContainer" alignment="CENTER" spacing="12" maxWidth="900" translateY="-75">
+                <padding>
+                    <Insets bottom="20" left="40" right="40" top="30" />
+                </padding>
 
-            <!-- Previous line (dimmed) -->
-            <Label fx:id="lyricsPrevious" styleClass="karaoke-line-previous" wrapText="true" alignment="CENTER" />
+                <!-- Previous line (dimmed) -->
+                <Label fx:id="lyricsPrevious" styleClass="karaoke-line-previous" wrapText="true" alignment="CENTER" />
 
-            <!-- Current line with gold effect -->
-            <StackPane fx:id="currentLineContainer">
-               <Label fx:id="lyricsCurrent" styleClass="karaoke-line-current" wrapText="true" alignment="CENTER" />
-               <Label fx:id="lyricsCurrentGold" styleClass="karaoke-line-gold" wrapText="true" alignment="CENTER" />
-            </StackPane>
+                <!-- Current line with gold effect -->
+                <StackPane fx:id="currentLineContainer">
+                    <Label fx:id="lyricsCurrent" styleClass="karaoke-line-current" wrapText="true" alignment="CENTER" />
+                    <Label fx:id="lyricsCurrentGold" styleClass="karaoke-line-gold" wrapText="true" alignment="CENTER" />
+                </StackPane>
 
-            <!-- Next line (dimmed) -->
-            <Label fx:id="lyricsNext" styleClass="karaoke-line-next" wrapText="true" alignment="CENTER" />
-         </VBox>
+                <!-- Next line (dimmed) -->
+                <Label fx:id="lyricsNext" styleClass="karaoke-line-next" wrapText="true" alignment="CENTER" />
+            </VBox>
 
-         <!-- Buttons at bottom center -->
-         <HBox alignment="BOTTOM_CENTER" spacing="15.0">
-            <padding>
-               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Button fx:id="playButton" mnemonicParsing="false" text="Abspielen" styleClass="transparent-button" translateX="-142" />
-            <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" styleClass="transparent-button" translateX="-142" />
-            <Button fx:id="stopButton" mnemonicParsing="false" text="Stopp" styleClass="transparent-button" translateX="42" />
-            <Button fx:id="nextButton" mnemonicParsing="false" text="Nächster Spieler" styleClass="transparent-button" translateX="42" />
-         </HBox>
-      </StackPane>
-   </center>
+            <!-- Buttons at bottom center -->
+            <HBox alignment="BOTTOM_CENTER" spacing="15.0">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+                <Button fx:id="playButton" mnemonicParsing="false" text="Abspielen" styleClass="transparent-button" translateX="-142" />
+                <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" styleClass="transparent-button" translateX="-142" />
+                <Button fx:id="stopButton" mnemonicParsing="false" text="Stopp" styleClass="transparent-button" translateX="42" />
+                <Button fx:id="nextButton" mnemonicParsing="false" text="Nächster Spieler" styleClass="transparent-button" translateX="42" />
+            </HBox>
+        </StackPane>
+    </center>
 </BorderPane>

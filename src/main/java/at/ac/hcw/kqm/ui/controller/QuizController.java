@@ -20,6 +20,8 @@ public class QuizController {
     @FXML
     private Label questionLabel;
     @FXML
+    private Label questionNumberLabel;
+    @FXML
     private Label playerInfoLabel;
     @FXML
     private Label songInfoLabel;
@@ -67,6 +69,7 @@ public class QuizController {
         current = engine.currentQuestion();
         selectedOptionId = -1;
         questionLabel.setText(current.getQuestionText());
+        updateQuestionNumber();
         updatePlayerInfo();
         List<AnswerOption> opts = new ArrayList<>(current.getAnswerOptions());
         // Ensure we have four options
@@ -101,6 +104,12 @@ public class QuizController {
         songInfoLabel.setText(songName);
     }
 
+    private void updateQuestionNumber() {
+        int currentQuestionNum = engine.getQuestionNumberForCurrentPlayer();
+        int totalQuestions = 5; // 5 Fragen pro Spieler
+        questionNumberLabel.setText("Frage " + currentQuestionNum + "/" + totalQuestions);
+    }
+
     private void setAnswerButton(Button b, AnswerOption opt) {
         b.setText(opt.getText());
     }
@@ -128,11 +137,11 @@ public class QuizController {
 
     private void colorAnswerButton(Button btn, int optionId, int correctId) {
         if (optionId == correctId) {
-            // Richtige Antwort = GRÜN
-            btn.setStyle("-fx-background-color: #00aa00; -fx-text-fill: white; -fx-font-weight: bold;");
+            // Richtige Antwort = Dunkelgrün mit intensivem Farbverlauf und Tiefe
+            btn.setStyle("-fx-background-color: linear-gradient(to bottom, rgba(50,180,50,0.67), rgba(40,160,40,0.72), rgba(30,140,30,0.77), rgba(20,120,20,0.82), rgba(15,100,15,0.77), rgba(10,80,10,0.72)) !important; -fx-text-fill: white !important; -fx-font-weight: bold !important; -fx-background-radius: 30 50 40 45 !important; -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 12, 0.7, 0, 3), innershadow(gaussian, rgba(0,50,0,0.4), 8, 0.5, -4, 2), innershadow(gaussian, rgba(0,50,0,0.4), 8, 0.5, 4, 2), dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.6, 0, 2);");
         } else if (optionId == selectedOptionId) {
-            // Gewählte aber falsche Antwort = ROT
-            btn.setStyle("-fx-background-color: #cc0000; -fx-text-fill: white; -fx-font-weight: bold;");
+            // Gewählte aber falsche Antwort = Dunkelrot mit intensivem Farbverlauf und Tiefe
+            btn.setStyle("-fx-background-color: linear-gradient(to bottom, rgba(180,50,50,0.77), rgba(160,40,40,0.82), rgba(140,30,30,0.87), rgba(120,20,20,0.89), rgba(100,15,15,0.87), rgba(80,10,10,0.82)) !important; -fx-text-fill: white !important; -fx-font-weight: bold !important; -fx-background-radius: 35 45 50 40 !important; -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 12, 0.7, 0, 3), innershadow(gaussian, rgba(100,0,0,0.4), 8, 0.5, -4, 2), innershadow(gaussian, rgba(100,0,0,0.4), 8, 0.5, 4, 2), dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.6, 0, 2);");
         } else {
             // Nicht gewählte Antworten = normal
             btn.setStyle("");
@@ -220,46 +229,7 @@ public class QuizController {
     }
 
     private void applyReplacement() {
-        Player currentPlayer = engine.currentPlayer();
-        if (!currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.REPLACE_QUESTION))
-            return;
-
-        currentPlayer.useJoker(at.ac.hcw.kqm.model.JokerType.REPLACE_QUESTION);
-        AppState.get().setJokerUsed(at.ac.hcw.kqm.model.JokerType.REPLACE_QUESTION);
-
-        // Replace with a special Fill&Jump lyric completion question from the same song
-        // if available
-        List<Question> pool = AppState.get().getQuestionRepo().getQuestionsBySongId(current.getSongId());
-        Question replacement = null;
-        for (Question q : pool) {
-            String t = q.getQuestionText() == null ? "" : q.getQuestionText().toLowerCase();
-            boolean isFill = t.startsWith("vervollständige") || t.startsWith("vervollstaendige")
-                    || t.contains("vervollständige den text") || t.contains("vervollstaendige den text");
-            if (isFill && q.getId() != current.getId()) {
-                replacement = q;
-                break;
-            }
-        }
-        if (replacement == null) {
-            // fallback to any other different question
-            for (Question q : pool) {
-                if (q.getId() != current.getId()) {
-                    replacement = q;
-                    break;
-                }
-            }
-        }
-        if (replacement != null) {
-            current = replacement;
-            questionLabel.setText(current.getQuestionText());
-            List<AnswerOption> opts = new ArrayList<>(current.getAnswerOptions());
-            setAnswerButton(answerA, opts.get(0));
-            setAnswerButton(answerB, opts.get(1));
-            setAnswerButton(answerC, opts.get(2));
-            setAnswerButton(answerD, opts.get(3));
-            resetAnswerButtonsEnabled();
-            selectedOptionId = -1;
-            refreshJokerButtonsState();
-        }
+        // Show King.fxml screen
+        SceneManager.get().showKing();
     }
 }

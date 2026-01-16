@@ -62,6 +62,10 @@ public class SceneManager {
         loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerRules.fxml", 1200, 800, "Joker Regeln");
     }
 
+    public void showKing() {
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/King.fxml", 1200, 800, "King Joker");
+    }
+
     /**
      * Loads an FXML file from the classpath and shows it on the primary stage.
      */
