@@ -195,10 +195,15 @@ public class QuizController {
 
     private void setJokerButtonState(Button btn, javafx.scene.image.ImageView imgView, String originalImagePath, String deadImagePath, boolean used) {
         btn.setDisable(used);
+        // Always load images from classpath (relative to /)
         if (used) {
-            imgView.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream(deadImagePath)));
+            imgView.setImage(new javafx.scene.image.Image(
+                QuizController.class.getResourceAsStream(deadImagePath)
+            ));
         } else {
-            imgView.setImage(new javafx.scene.image.Image(getClass().getResourceAsStream(originalImagePath)));
+            imgView.setImage(new javafx.scene.image.Image(
+                QuizController.class.getResourceAsStream(originalImagePath)
+            ));
         }
     }
 
