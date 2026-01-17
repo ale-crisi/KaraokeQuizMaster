@@ -1,11 +1,11 @@
 package at.ac.hcw.kqm.persistence;
 
+import at.ac.hcw.kqm.model.AnswerOption;
+import at.ac.hcw.kqm.model.Question;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import at.ac.hcw.kqm.model.AnswerOption;
-import at.ac.hcw.kqm.model.Question;
 
 /**
  * In-memory implementation of QuestionRepository.

@@ -2,11 +2,7 @@ package at.ac.hcw.kqm.ui.controller;
 
 import at.ac.hcw.kqm.app.AppState;
 import at.ac.hcw.kqm.engine.GameEngine;
-import at.ac.hcw.kqm.model.AnswerOption;
-import at.ac.hcw.kqm.model.JokerType;
-import at.ac.hcw.kqm.model.Player;
-import at.ac.hcw.kqm.model.Question;
-import at.ac.hcw.kqm.model.Song;
+import at.ac.hcw.kqm.model.*;
 import at.ac.hcw.kqm.ui.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

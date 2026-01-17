@@ -1,11 +1,9 @@
 package at.ac.hcw.kqm.ui.controller;
 
-import java.util.List;
-
 import at.ac.hcw.kqm.app.AppState;
+import at.ac.hcw.kqm.model.LyricLine;
 import at.ac.hcw.kqm.model.Player;
 import at.ac.hcw.kqm.model.Song;
-import at.ac.hcw.kqm.model.LyricLine;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,9 +11,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+
 import java.io.File;
 import java.net.URL;
 import java.text.Normalizer;
+import java.util.List;
 
 public class KaraokeController {
 

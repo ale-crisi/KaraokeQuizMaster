@@ -1,12 +1,12 @@
 package at.ac.hcw.kqm.joker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import at.ac.hcw.kqm.model.Question;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Fifty-Fifty Joker: Removes two incorrect answer options.

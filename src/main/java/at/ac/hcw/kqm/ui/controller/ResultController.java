@@ -1,7 +1,5 @@
 package at.ac.hcw.kqm.ui.controller;
 
-import java.util.List;
-
 import at.ac.hcw.kqm.app.AppState;
 import at.ac.hcw.kqm.engine.GameEngine;
 import at.ac.hcw.kqm.engine.TieBreakManager;
@@ -16,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 public class ResultController {
 

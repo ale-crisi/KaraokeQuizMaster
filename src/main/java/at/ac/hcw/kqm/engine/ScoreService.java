@@ -1,9 +1,9 @@
 package at.ac.hcw.kqm.engine;
 
+import at.ac.hcw.kqm.model.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import at.ac.hcw.kqm.model.Player;
 
 /**
  * Service class for score calculation and ranking logic.

@@ -1,12 +1,12 @@
 package at.ac.hcw.kqm.ui.controller;
 
 
+import at.ac.hcw.kqm.ui.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import at.ac.hcw.kqm.ui.SceneManager;
 
 public class JokerRulesController {
 

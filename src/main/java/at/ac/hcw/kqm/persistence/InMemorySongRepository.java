@@ -1,10 +1,10 @@
 package at.ac.hcw.kqm.persistence;
 
+import at.ac.hcw.kqm.model.Song;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import at.ac.hcw.kqm.model.Song;
 
 
 public class InMemorySongRepository implements SongRepository {

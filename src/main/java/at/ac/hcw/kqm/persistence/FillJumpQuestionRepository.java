@@ -1,10 +1,10 @@
 package at.ac.hcw.kqm.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import at.ac.hcw.kqm.model.AnswerOption;
 import at.ac.hcw.kqm.model.Question;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Repository for Fill & Jump Joker questions.
