@@ -58,7 +58,7 @@
 
 
          <!-- Tie-Break Background (image) - hidden by default -->
-         <StackPane fx:id="tieBreakBackground" visible="false" style="-fx-background-image: url('file:///C:/Users/acmat/Projects/KaraokeQuizMaster/src/main/resources/at/ac/hcw/kqm/ui/fxml/assets/TieBreak.jpeg'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
+         <StackPane fx:id="tieBreakBackground" visible="false" style="-fx-background-image: url('file:///C:/Users/acmat/IdeaProjects/KaraokeQuizMaster/src/main/resources/at/ac/hcw/kqm/ui/fxml/assets/TieBreak.jpeg'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;">
             <VBox fx:id="tieBreakRankingContainer" spacing="40.0" alignment="CENTER" translateY="638" minHeight="300">
                <Label text="TEST" style="-fx-text-fill: red; -fx-font-size: 24px;" />
                <!-- Tie-break ranking will be added here -->
