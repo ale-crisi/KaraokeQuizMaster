@@ -160,12 +160,11 @@ public class KaraokeController {
                 return res != null ? res.toExternalForm() : null;
             }
             // Already a URI (file:, http:, https:)
-            if (path.startsWith("file:") || path.startsWith("http:" ) || path.startsWith("https:")) {
+            if (path.startsWith("file:") || path.startsWith("http:") || path.startsWith("https:")) {
                 return path;
             }
-            // Fallback: treat as file system path
-            File f = new File(path);
-            return f.exists() ? f.toURI().toString() : null;
+            // Keine Dateisystemzugriffe mehr erlaubt, daher null zurückgeben
+            return null;
         } catch (Exception e) {
             return null;
         }
@@ -175,22 +174,18 @@ public class KaraokeController {
     // using normalized title/artist matches. Returns a Media-friendly URI or null.
     private String findFallbackMediaUri(Song s) {
         try {
-            String resourceDirPath = "/at/ac/hcw/kqm/ui/fxml/assets/audio";
-            URL res = KaraokeController.class.getResource(resourceDirPath);
-            // Case 1: resources available as files (dev mode)
-            if (res != null && "file".equalsIgnoreCase(res.getProtocol())) {
-                File dir = new File(res.toURI());
-                System.out.println("[Karaoke] Scanning classpath dir: " + dir.getAbsolutePath());
-                String found = searchDirectoryForSong(dir, s);
-                if (found != null) return found;
-            }
-
-            // Case 2: search common dev folders under src/main/resources recursively for assets/audio
-            File resourcesRoot = new File(System.getProperty("user.dir"), "src/main/resources");
-            if (resourcesRoot.isDirectory()) {
-                System.out.println("[Karaoke] Scanning resources tree: " + resourcesRoot.getAbsolutePath());
-                String found = searchInResourcesTree(resourcesRoot, s);
-                if (found != null) return found;
+            // Suche nach Audiodateien ausschließlich im Classpath-Ordner
+            String[] extensions = { ".mp3", ".m4a", ".wav" };
+            String basePath = "/at/ac/hcw/kqm/ui/fxml/assets/audio/";
+            String artistN = normalize(s.getArtist());
+            String titleN = normalize(s.getTitle());
+            for (String ext : extensions) {
+                String candidate = basePath + artistN + " - " + titleN + ext;
+                URL res = KaraokeController.class.getResource(candidate);
+                if (res != null) {
+                    System.out.println("[Karaoke] Found audio resource: " + candidate);
+                    return res.toExternalForm();
+                }
             }
         } catch (Exception e) {
             System.err.println("[Karaoke] Error in fallback search: " + e.getMessage());
@@ -198,53 +193,7 @@ public class KaraokeController {
         return null;
     }
 
-    private String searchInResourcesTree(File root, Song s) {
-        if (root == null || !root.isDirectory()) return null;
-        File[] children = root.listFiles();
-        if (children == null) return null;
-        for (File c : children) {
-            if (c.isDirectory()) {
-                if (c.getName().equalsIgnoreCase("audio") && c.getParentFile() != null && c.getParentFile().getName().equalsIgnoreCase("assets")) {
-                    String found = searchDirectoryForSong(c, s);
-                    if (found != null) return found;
-                }
-                String foundDeep = searchInResourcesTree(c, s);
-                if (foundDeep != null) return foundDeep;
-            }
-        }
-        return null;
-    }
 
-    private String searchDirectoryForSong(File dir, Song s) {
-        if (dir == null || !dir.isDirectory()) return null;
-        String artistN = normalize(s.getArtist());
-        String titleN = normalize(s.getTitle());
-
-        File[] files = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".mp3") || name.toLowerCase().endsWith(".m4a") || name.toLowerCase().endsWith(".wav"));
-        if (files == null || files.length == 0) {
-            System.out.println("[Karaoke] No audio files in: " + dir.getAbsolutePath());
-            return null;
-        }
-
-        int bestScore = -1;
-        File best = null;
-        for (File f : files) {
-            String n = normalize(f.getName());
-            boolean artistMatch = n.contains(artistN);
-            int score = scoreTitleMatch(titleN, n);
-            if (artistMatch) score += 10; // prioritize artist-name matches
-            if (score > bestScore) {
-                bestScore = score;
-                best = f;
-            }
-        }
-        if (bestScore >= 3 && best != null) { // relaxed threshold to accommodate variant filenames
-            System.out.println("[Karaoke] Best match found: " + best.getName() + " (score: " + bestScore + ")");
-            return best.toURI().toString();
-        }
-        System.out.println("[Karaoke] No good match found (best score: " + bestScore + ")");
-        return null;
-    }
 
     private int scoreTitleMatch(String titleNorm, String nameNorm) {
         String[] tokens = titleNorm.split(" ");
