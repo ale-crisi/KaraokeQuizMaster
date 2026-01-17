@@ -68,21 +68,21 @@
                     <HBox spacing="20.0" alignment="CENTER">
                         <Button fx:id="replacementButton" styleClass="joker-card joker-card-fill" translateX="-10.8" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
                             <graphic>
-                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                <ImageView fx:id="replacementImage" fitWidth="170" fitHeight="210" preserveRatio="true">
                                     <Image url="@assets/JokerKing.png" />
                                 </ImageView>
                             </graphic>
                         </Button>
                         <Button fx:id="fiftyFiftyButton" styleClass="joker-card joker-card-fifty" translateX="0" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
                             <graphic>
-                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                <ImageView fx:id="fiftyFiftyImage" fitWidth="170" fitHeight="210" preserveRatio="true">
                                     <Image url="@assets/JokerAss.png" />
                                 </ImageView>
                             </graphic>
                         </Button>
                         <Button fx:id="hintButton" styleClass="joker-card joker-card-hint" translateX="22.6" translateY="38" style="-fx-border-width: 0 !important; -fx-padding: 0 !important; -fx-background-insets: 0 !important; -fx-border: none !important; -fx-background-color: transparent !important;">
                             <graphic>
-                                <ImageView fitWidth="170" fitHeight="210" preserveRatio="true">
+                                <ImageView fx:id="hintImage" fitWidth="170" fitHeight="210" preserveRatio="true">
                                     <Image url="@assets/JokerHint.png" />
                                 </ImageView>
                             </graphic>

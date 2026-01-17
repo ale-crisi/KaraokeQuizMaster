@@ -16,7 +16,7 @@ public enum JokerType {
     HINT,
 
     /**
-     * Replace Question: Skips the current question and replaces it with a new one.
+     * Fill and Jump: Skips the current question and replaces it with a new one.
      */
-    REPLACE_QUESTION
+    FIILL_AND_JUMP
 }
