@@ -9,6 +9,7 @@ import at.ac.hcw.kqm.model.JokerType;
 import at.ac.hcw.kqm.model.Player;
 import at.ac.hcw.kqm.model.Question;
 import at.ac.hcw.kqm.model.Song;
+import at.ac.hcw.kqm.persistence.FillJumpQuestionRepository;
 import at.ac.hcw.kqm.persistence.InMemoryQuestionRepository;
 import at.ac.hcw.kqm.persistence.InMemorySongRepository;
 import at.ac.hcw.kqm.persistence.QuestionRepository;
@@ -22,6 +23,7 @@ public class AppState {
     private final GameEngine engine = new GameEngine();
     private final SongRepository songRepo = new InMemorySongRepository();
     private final QuestionRepository questionRepo = new InMemoryQuestionRepository();
+    private final FillJumpQuestionRepository fillJumpRepo = new FillJumpQuestionRepository();
 
     private final List<Player> players = new ArrayList<>();
     private final List<Song> selectedSongs = new ArrayList<>();
@@ -161,6 +163,10 @@ public class AppState {
         return songRepo;
     }
 
+    public FillJumpQuestionRepository getFillJumpRepo() {
+        return fillJumpRepo;
+    }
+
     // Joker APIs
     public void setPendingJoker(JokerType type) {
         this.pendingJoker = type;
@@ -178,7 +184,7 @@ public class AppState {
         switch (type) {
             case FIFTY_FIFTY -> this.usedFiftyThisQuestion = true;
             case HINT -> this.usedHintThisQuestion = true;
-            case REPLACE_QUESTION -> this.usedFillThisQuestion = true;
+            case FIILL_AND_JUMP -> this.usedFillThisQuestion = true;
         }
     }
 
@@ -188,7 +194,7 @@ public class AppState {
         return switch (type) {
             case FIFTY_FIFTY -> usedFiftyThisQuestion;
             case HINT -> usedHintThisQuestion;
-            case REPLACE_QUESTION -> usedFillThisQuestion;
+            case FIILL_AND_JUMP -> usedFillThisQuestion;
         };
     }
 
