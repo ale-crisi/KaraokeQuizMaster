@@ -46,11 +46,11 @@ public class SceneManager {
     }
 
     public void showTieBreak() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/TieBreak.fxml", 900, 700, "Tie-Break");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/TieBreak.fxml", 1200, 800, "Tie-Break");
     }
 
     public void showResult() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Result.fxml", 900, 600, "Ergebnisse");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Result.fxml", 1200, 800, "Ergebnisse");
     }
 
     public void showKaraoke() {
@@ -60,10 +60,6 @@ public class SceneManager {
 
     public void showJokerRules() {
         loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerRules.fxml", 1200, 800, "Joker Regeln");
-    }
-
-    public void showKing() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/King.fxml", 1200, 800, "King Joker");
     }
 
     /**

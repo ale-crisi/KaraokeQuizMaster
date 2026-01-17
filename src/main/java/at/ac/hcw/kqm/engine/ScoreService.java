@@ -13,7 +13,7 @@ public class ScoreService {
 
     /**
      * Awards points to a player for a correct answer.
-     * 
+     *
      * @param player The player to award points to
      * @param points Number of points to award
      */
@@ -24,7 +24,7 @@ public class ScoreService {
     /**
      * Calculates and returns the player ranking based on points.
      * Players are sorted in descending order by score.
-     * 
+     *
      * @param players List of players to rank
      * @return Sorted list with highest scoring players first
      */
@@ -36,7 +36,7 @@ public class ScoreService {
 
     /**
      * Checks if there is a tie between the top players.
-     * 
+     *
      * @param players List of players to check
      * @return true if at least two players share the highest score
      */
@@ -46,12 +46,21 @@ public class ScoreService {
         }
 
         List<Player> ranking = calculateRanking(players);
-        return ranking.get(0).getPoints() == ranking.get(1).getPoints();
+        int topScore = ranking.get(0).getPoints();
+        int count = 0;
+        for (Player p : ranking) {
+            if (p.getPoints() == topScore) {
+                count++;
+            } else {
+                break;
+            }
+        }
+        return count > 1;
     }
 
     /**
      * Returns all players who share the highest score.
-     * 
+     *
      * @param players List of players
      * @return List of tied players with top score
      */
@@ -73,7 +82,7 @@ public class ScoreService {
 
     /**
      * Resets all player scores to zero.
-     * 
+     *
      * @param players List of players to reset
      */
     public void resetScores(List<Player> players) {

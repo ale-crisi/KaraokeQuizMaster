@@ -17,12 +17,8 @@ public class GameEngine {
     private final ScoreService scoreService = new ScoreService();
 
     public void startGame(List<Player> players, List<Question> questions) {
-        System.out.println("GameEngine.startGame() called with " + players.size() + " players and " + questions.size()
-                + " questions");
         this.game = new Game(players, questions);
-        System.out.println("Game object created");
         this.phase = GamePhase.ASKING_QUESTION;
-        System.out.println("GameEngine.startGame() completed");
     }
 
     public Player currentPlayer() {
@@ -33,18 +29,13 @@ public class GameEngine {
     }
 
     public Question currentQuestion() {
-        System.out.println("GameEngine.currentQuestion() called, phase=" + phase);
         if (phase == GamePhase.TIE_BREAK) {
-            System.out.println("TIE_BREAK phase");
             return tieBreakQuestions.get(tieBreakQuestionIndex);
         }
-        System.out.println("Normal phase, game=" + game);
         if (game == null) {
             throw new RuntimeException("Game is null!");
         }
-        Question q = game.getCurrentQuestion();
-        System.out.println("Current question: " + (q != null ? q.getQuestionText() : "NULL"));
-        return q;
+        return game.getCurrentQuestion();
     }
 
     /**
@@ -93,15 +84,18 @@ public class GameEngine {
         phase = GamePhase.TIE_BREAK;
     }
 
-    public void answerTieBreakQuestion(int selectedOptionId, long answerTimeMs) {
+    public boolean answerTieBreakQuestion(int selectedOptionId, long answerTimeMs) {
         if (phase != GamePhase.TIE_BREAK)
-            return;
+            return false;
 
         boolean isCorrect = currentQuestion().isCorrect(selectedOptionId);
         game.recordTieBreakAnswer(currentPlayer(), answerTimeMs, isCorrect);
 
-        // Check if all players have answered this question
-        if (game.allTieBreakPlayersAnswered()) {
+        // Capture state before we advance/clear per-round data
+        boolean allAnsweredThisRound = game.allTieBreakPlayersAnswered();
+
+        // Award points BEFORE clearing data if all players answered
+        if (allAnsweredThisRound) {
             // Award points based on speed ranking
             awardTieBreakPoints();
         }
@@ -109,9 +103,31 @@ public class GameEngine {
         game.nextTieBreakTurn();
 
         // Check if we've exhausted questions or have a clear winner
-        if (game.getTieBreakQuestionIndex() >= tieBreakQuestions.size()) {
-            phase = GamePhase.FINISHED;
+        if (allAnsweredThisRound) {
+            if (game.getTieBreakQuestionIndex() >= tieBreakQuestions.size() || hasWinner()) {
+                phase = GamePhase.FINISHED;
+            }
         }
+
+        return allAnsweredThisRound;
+    }
+
+    /**
+     * Check if there's a clear winner in tie-break (one player has won against others)
+     */
+    private boolean hasWinner() {
+        List<Player> tieBreakPlayers = game.getTieBreakPlayers();
+        if (tieBreakPlayers.size() <= 1) {
+            return true;
+        }
+
+        // Sort by points descending
+        List<Player> sorted = tieBreakPlayers.stream()
+                .sorted((a, b) -> b.getPoints() - a.getPoints())
+                .toList();
+
+        // If top player has more points than second, we have a winner
+        return sorted.get(0).getPoints() > sorted.get(1).getPoints();
     }
 
     private void awardTieBreakPoints() {
