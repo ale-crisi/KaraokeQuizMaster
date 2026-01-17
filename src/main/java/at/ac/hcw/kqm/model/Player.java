@@ -158,7 +158,7 @@ public class Player {
                 return !fiftyFiftyUsed;
             case HINT:
                 return !hintUsed;
-            case FIILL_AND_JUMP:
+            case FILL_AND_JUMP:
                 return !replaceQuestionUsed;
             default:
                 return false;
@@ -176,7 +176,7 @@ public class Player {
             case HINT:
                 hintUsed = true;
                 break;
-            case FIILL_AND_JUMP:
+            case FILL_AND_JUMP:
                 replaceQuestionUsed = true;
                 break;
         }
