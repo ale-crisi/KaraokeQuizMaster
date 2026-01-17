@@ -302,6 +302,13 @@
 .joker-card:focused,
 .joker-card:pressed,
 .joker-card:armed,
+
+    /* Selection feedback on JokerFill answer buttons */
+.selected-answer {
+    -fx-border-color: #f1c40f;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
 .joker-card:default {
     -fx-background-color: transparent;
     -fx-background-insets: 0;

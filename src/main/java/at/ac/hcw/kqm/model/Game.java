@@ -107,12 +107,4 @@ public class Game {
     public int getTieBreakQuestionIndex() {
         return tieBreakQuestionIndex;
     }
-
-    public int getQuestionIndex() {
-        return currentQuestionIndex;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
 }
