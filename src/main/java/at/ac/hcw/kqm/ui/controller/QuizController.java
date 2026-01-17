@@ -186,7 +186,7 @@ public class QuizController {
 
         boolean fiftyAvailable = currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.FIFTY_FIFTY);
         boolean hintAvailable = currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.HINT);
-        boolean replaceAvailable = currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.FIILL_AND_JUMP);
+        boolean replaceAvailable = currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.FILL_AND_JUMP);
 
         setJokerButtonState(fiftyFiftyButton, fiftyFiftyImage, "/at/ac/hcw/kqm/ui/fxml/assets/JokerAss.png", "/at/ac/hcw/kqm/ui/fxml/assets/AssDead.png", !fiftyAvailable);
         setJokerButtonState(hintButton, hintImage, "/at/ac/hcw/kqm/ui/fxml/assets/JokerHint.png", "/at/ac/hcw/kqm/ui/fxml/assets/HintDead.png", !hintAvailable);
@@ -222,7 +222,7 @@ public class QuizController {
 
     private void applyReplacement() {
         Player currentPlayer = engine.currentPlayer();
-        if (!currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.FIILL_AND_JUMP))
+        if (!currentPlayer.isJokerAvailable(at.ac.hcw.kqm.model.JokerType.FILL_AND_JUMP))
             return;
 
         // Open Fill & Jump joker screen

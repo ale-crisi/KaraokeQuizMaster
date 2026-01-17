@@ -184,7 +184,7 @@ public class AppState {
         switch (type) {
             case FIFTY_FIFTY -> this.usedFiftyThisQuestion = true;
             case HINT -> this.usedHintThisQuestion = true;
-            case FIILL_AND_JUMP -> this.usedFillThisQuestion = true;
+            case FILL_AND_JUMP -> this.usedFillThisQuestion = true;
         }
     }
 
@@ -194,7 +194,7 @@ public class AppState {
         return switch (type) {
             case FIFTY_FIFTY -> usedFiftyThisQuestion;
             case HINT -> usedHintThisQuestion;
-            case FIILL_AND_JUMP -> usedFillThisQuestion;
+            case FILL_AND_JUMP -> usedFillThisQuestion;
         };
     }
 

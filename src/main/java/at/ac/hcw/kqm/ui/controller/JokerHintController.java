@@ -48,7 +48,7 @@ public class JokerHintController {
     }
 
     private void refreshJokerButtonsState() {
-        boolean fillAvailable = engine.currentPlayer().isJokerAvailable(JokerType.FIILL_AND_JUMP);
+        boolean fillAvailable = engine.currentPlayer().isJokerAvailable(JokerType.FILL_AND_JUMP);
         boolean fiftyAvailable = engine.currentPlayer().isJokerAvailable(JokerType.FIFTY_FIFTY);
 
         setJokerButtonState(fillJumpButton, !fillAvailable);
@@ -136,12 +136,12 @@ public class JokerHintController {
     @FXML
     public void applyFillAndReturn() {
         at.ac.hcw.kqm.model.Player currentPlayer = engine.currentPlayer();
-        if (!currentPlayer.isJokerAvailable(JokerType.FIILL_AND_JUMP))
+        if (!currentPlayer.isJokerAvailable(JokerType.FILL_AND_JUMP))
             return;
 
-        currentPlayer.useJoker(JokerType.FIILL_AND_JUMP);
-        AppState.get().setJokerUsed(JokerType.FIILL_AND_JUMP);
-        AppState.get().setPendingJoker(JokerType.FIILL_AND_JUMP);
+        currentPlayer.useJoker(JokerType.FILL_AND_JUMP);
+        AppState.get().setJokerUsed(JokerType.FILL_AND_JUMP);
+        AppState.get().setPendingJoker(JokerType.FILL_AND_JUMP);
         SceneManager.get().showQuiz();
     }
 

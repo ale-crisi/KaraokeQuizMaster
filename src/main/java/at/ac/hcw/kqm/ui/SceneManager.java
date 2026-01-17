@@ -1,19 +1,26 @@
 package at.ac.hcw.kqm.ui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class SceneManager {
+    private static final Logger LOGGER = Logger.getLogger(SceneManager.class.getName());
 
     private static SceneManager instance;
     private final Stage primaryStage;
+
+    // Unified window size (same as Start screen)
+    private static final int BASE_WIDTH = 1200;
+    private static final int BASE_HEIGHT = 800;
 
     private SceneManager(Stage stage) {
         this.primaryStage = stage;
@@ -31,73 +38,84 @@ public class SceneManager {
         return instance;
     }
 
+    // --- Public navigation helpers (all use unified sizing) ---
+
     public void showStart() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Start.fxml", 1200, 800, "Karaoke Quiz Master – Start");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Start.fxml", "Karaoke Quiz Master – Start");
     }
 
     public void showSongSelection() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/SongSelection.fxml", 1200, 800, "Song Auswahl");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/SongSelection.fxml", "Song Auswahl");
     }
 
     public void showQuiz() {
-        System.out.println("SceneManager.showQuiz() called");
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Quiz.fxml", 1200, 800, "Quiz");
-        System.out.println("SceneManager.showQuiz() finished");
+        LOGGER.fine("showQuiz() called");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Quiz.fxml", "Quiz");
+        LOGGER.fine("showQuiz() finished");
     }
 
     public void showTieBreak() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/TieBreak.fxml", 900, 700, "Tie-Break");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/TieBreak.fxml", "Tie-Break");
     }
 
     public void showResult() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Result.fxml", 900, 600, "Ergebnisse");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Result.fxml", "Ergebnisse");
     }
 
     public void showKaraoke() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Karaoke.fxml", 1000, 700, "Karaoke");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/Karaoke.fxml", "Karaoke");
     }
 
-
     public void showJokerRules() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerRules.fxml", 1200, 800, "Joker Regeln");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerRules.fxml", "Joker Regeln");
     }
 
     public void showJokerFill() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerFill.fxml", 1200, 800, "Fill & Jump Joker");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerFill.fxml", "Fill & Jump Joker");
     }
 
     public void showJokerFifty() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerFifty.fxml", 1200, 800, "50/50 Joker");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerFifty.fxml", "50/50 Joker");
     }
 
     public void showJokerHint() {
-        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerHint.fxml", 1200, 800, "Hint Joker");
+        loadAndShow("/at/ac/hcw/kqm/ui/fxml/JokerHint.fxml", "Hint Joker");
     }
 
+    // --- Core loader ---
+
     /**
-     * Loads an FXML file from the classpath and shows it on the primary stage.
+     * Loads an FXML file from the classpath and shows it on the primary stage,
+     * using a unified window size (BASE_WIDTH x BASE_HEIGHT) for all screens.
      */
-    public void loadAndShow(String fxmlPath, int width, int height, String title) {
+    private void loadAndShow(String fxmlPath, String title) {
         try {
-            System.out.println("SceneManager: Loading FXML: " + fxmlPath);
+            LOGGER.fine("Loading FXML: " + fxmlPath);
+
             URL resource = getResource(fxmlPath);
-            System.out.println("SceneManager: Resource found: " + resource);
+            LOGGER.fine("Resource found: " + resource);
+
             FXMLLoader loader = new FXMLLoader(resource);
-            System.out.println("SceneManager: FXMLLoader created");
+            LOGGER.fine("FXMLLoader created");
+
             Parent root = loader.load();
-            System.out.println("SceneManager: FXML loaded successfully");
-            Scene scene = new Scene(root, width, height);
+            LOGGER.fine("FXML loaded successfully");
+
+            Scene scene = new Scene(root, BASE_WIDTH, BASE_HEIGHT);
+
             primaryStage.setTitle(title);
             primaryStage.setScene(scene);
+
+            // Optional: ensure the stage matches the scene size exactly
+            primaryStage.sizeToScene();
+
             primaryStage.show();
-            System.out.println("SceneManager: Scene shown successfully");
+            LOGGER.fine("Scene shown successfully");
         } catch (IOException e) {
-            System.err.println("SceneManager: IOException while loading " + fxmlPath);
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "IOException while loading " + fxmlPath, e);
             throw new RuntimeException("Failed to load FXML: " + fxmlPath, e);
         } catch (Exception e) {
-            System.err.println("SceneManager: Exception while loading " + fxmlPath);
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Exception while loading " + fxmlPath, e);
             throw new RuntimeException("Failed to load FXML: " + fxmlPath, e);
         }
     }
@@ -107,3 +125,4 @@ public class SceneManager {
         return Objects.requireNonNull(url, "Resource not found: " + path);
     }
 }
+

@@ -26,6 +26,30 @@ public class TieBreakController {
     private Label currentPlayerLabel;
     @FXML
     private Label questionLabel;
+
+    /**
+     * Verschiebt das questionLabel um die angegebenen Pixel.
+     */
+    public void moveQuestionLabel(double dx, double dy) {
+        questionLabel.setTranslateX(dx);
+        questionLabel.setTranslateY(dy);
+    }
+
+    /**
+     * Verschiebt das timerLabel um die angegebenen Pixel.
+     */
+    public void moveTimerLabel(double dx, double dy) {
+        timerLabel.setTranslateX(dx);
+        timerLabel.setTranslateY(dy);
+    }
+
+    /**
+     * Verschiebt das currentPlayerLabel um die angegebenen Pixel.
+     */
+    public void moveCurrentPlayerLabel(double dx, double dy) {
+        currentPlayerLabel.setTranslateX(dx);
+        currentPlayerLabel.setTranslateY(dy);
+    }
     @FXML
     private Button answerA, answerB, answerC, answerD;
     @FXML

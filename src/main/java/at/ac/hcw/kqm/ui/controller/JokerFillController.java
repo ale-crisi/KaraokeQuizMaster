@@ -123,8 +123,8 @@ public class JokerFillController {
 
         // Mark Fill & Jump joker as used when answering the question
         Player currentPlayer = engine.currentPlayer();
-        currentPlayer.useJoker(JokerType.FIILL_AND_JUMP);
-        AppState.get().setJokerUsed(JokerType.FIILL_AND_JUMP);
+        currentPlayer.useJoker(JokerType.FILL_AND_JUMP);
+        AppState.get().setJokerUsed(JokerType.FILL_AND_JUMP);
 
         engine.answerQuestion(selectedOptionId);
 
