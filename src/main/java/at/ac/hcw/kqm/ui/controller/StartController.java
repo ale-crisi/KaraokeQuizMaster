@@ -6,9 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
-
 public class StartController {
 
     @FXML

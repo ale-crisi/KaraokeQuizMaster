@@ -79,12 +79,6 @@ public class ResultController {
         battleContainer.setVisible(true);
         startBattleButtonImage.setVisible(true);
 
-        // Get tied players (players with same top score)
-        int topScore = ranking.get(0).getPoints();
-        List<Player> tiedPlayers = ranking.stream()
-                .filter(p -> p.getPoints() == topScore)
-                .toList();
-
         // Clear and populate ranking on tie-break background
         tieBreakRankingContainer.getChildren().clear();
         // Shift the ranking area: ~1cm down (~38px) and ~2cm left (~76px)

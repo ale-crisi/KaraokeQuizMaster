@@ -1,12 +1,9 @@
 package at.ac.hcw.kqm.ui.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import at.ac.hcw.kqm.app.AppState;
 import at.ac.hcw.kqm.engine.GameEngine;
-import at.ac.hcw.kqm.joker.FiftyFiftyJoker;
-import at.ac.hcw.kqm.joker.HintJoker;
 import at.ac.hcw.kqm.model.AnswerOption;
 import at.ac.hcw.kqm.model.Player;
 import at.ac.hcw.kqm.model.Question;
@@ -36,9 +33,6 @@ public class QuizController {
 
     private Question current;
     private int selectedOptionId = -1;
-
-    private final FiftyFiftyJoker fiftyFiftyJoker = new FiftyFiftyJoker();
-    private final HintJoker hintJoker = new HintJoker();
 
     @FXML
     public void initialize() {
@@ -73,7 +67,7 @@ public class QuizController {
         questionLabel.setText(current.getQuestionText());
         updateQuestionNumber();
         updatePlayerInfo();
-        List<AnswerOption> opts = new ArrayList<>(current.getAnswerOptions());
+        List<AnswerOption> opts = current.getAnswerOptions();
         // Ensure we have four options
         while (opts.size() < 4) {
             opts.add(new AnswerOption(opts.size() + 1, "Option " + (opts.size() + 1)));
