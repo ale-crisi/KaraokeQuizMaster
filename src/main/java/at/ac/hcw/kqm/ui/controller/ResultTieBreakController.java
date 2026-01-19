@@ -11,49 +11,57 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
 import java.util.List;
 
 public class ResultTieBreakController {
-    @FXML private StackPane tieBreakBackground;
+
     @FXML private VBox tieBreakRankingContainer;
     @FXML private Button startBattleButtonImage;
-    @FXML private Button showFinalResultButton;
 
     @FXML
     public void initialize() {
-        List<Player> ranking = AppState.get().getEngine().getRanking();
+        List<Player> tiedPlayers = AppState.get().getEngine().getTiedPlayers();
+
         tieBreakRankingContainer.getChildren().clear();
-        for (Player player : ranking) {
+
+        if (tiedPlayers == null || tiedPlayers.isEmpty()) {
+            Label fallback = new Label("Kein Gleichstand gefunden.");
+            fallback.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
+            tieBreakRankingContainer.getChildren().add(fallback);
+            return;
+        }
+
+        for (Player player : tiedPlayers) {
             Song song = AppState.get().getSongForPlayer(player);
             String songTitle = (song != null) ? song.getTitle() : "N/A";
-            HBox row = new HBox(76);
-            row.setAlignment(Pos.CENTER);
+
+            HBox row = new HBox(100);
+            row.setAlignment(Pos.CENTER_LEFT);
+
             Label nameLabel = new Label(player.getName());
-            nameLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
             nameLabel.setPrefWidth(150);
-            nameLabel.setAlignment(Pos.CENTER);
+            nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;");
+
             Label songLabel = new Label(songTitle);
-            songLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: #FFF299; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
-            songLabel.setPrefWidth(250);
+            songLabel.setPrefWidth(200);
             songLabel.setWrapText(true);
-            songLabel.setAlignment(Pos.CENTER);
+            songLabel.setStyle("-fx-text-fill: #FFF299; -fx-font-size: 15px; -fx-font-weight: bold;");
+
             Label pointsLabel = new Label(player.getPoints() + " PTS");
-            pointsLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: #CCCCCC; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10 20 10 20;");
-            pointsLabel.setPrefWidth(100);
-            pointsLabel.setAlignment(Pos.CENTER);
+            pointsLabel.setPrefWidth(60);
+            pointsLabel.setStyle("-fx-text-fill: #CCCCCC; -fx-font-size: 15px; -fx-font-weight: bold;");
+
             row.getChildren().addAll(nameLabel, songLabel, pointsLabel);
             tieBreakRankingContainer.getChildren().add(row);
         }
+
         startBattleButtonImage.setOnAction(e -> {
             TieBreakManager tieBreakManager = new TieBreakManager();
             List<Question> tieBreakQuestions = tieBreakManager.getProgrammingQuestions();
             AppState.get().getEngine().startTieBreak(tieBreakQuestions);
             SceneManager.get().showTieBreak();
-        });
-        showFinalResultButton.setOnAction(e -> {
-            SceneManager.get().showResult();
         });
     }
 }

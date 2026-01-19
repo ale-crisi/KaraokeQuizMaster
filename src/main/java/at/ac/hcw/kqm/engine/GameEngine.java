@@ -10,8 +10,8 @@ import java.util.List;
 public class GameEngine {
 
     private List<Question> tieBreakQuestions;
-
     private int tieBreakQuestionIndex = 0;
+
     private Game game;
     private GamePhase phase = GamePhase.NOT_STARTED;
     private final ScoreService scoreService = new ScoreService();
@@ -38,14 +38,8 @@ public class GameEngine {
         return game.getCurrentQuestion();
     }
 
-    /**
-     * If the player answers a question correct he gets and point until everyone has
-     * gotten 5 questions each
-     */
     public void answerQuestion(int selectedOptionId) {
-
-        if (phase != GamePhase.ASKING_QUESTION)
-            return;
+        if (phase != GamePhase.ASKING_QUESTION) return;
 
         if (currentQuestion().isCorrect(selectedOptionId)) {
             scoreService.awardPoints(currentPlayer(), 1);
@@ -67,12 +61,16 @@ public class GameEngine {
     }
 
     public int getQuestionNumberForCurrentPlayer() {
-        // 1-based number for display
         return game.getQuestionsForCurrentPlayer() + 1;
     }
 
     public boolean needsTieBreak() {
         return scoreService.hasTie(game.getPlayers());
+    }
+
+    /** Spieler, die im Top-Score Gleichstand sind (für TieBreak-Intro). */
+    public List<Player> getTiedPlayers() {
+        return scoreService.getTiedPlayers(game.getPlayers());
     }
 
     public void startTieBreak(List<Question> tieBreakQuestions) {
@@ -84,25 +82,23 @@ public class GameEngine {
         phase = GamePhase.TIE_BREAK;
     }
 
+    /**
+     * @return true wenn diese Runde abgeschlossen ist (alle TieBreak-Spieler haben diese Frage beantwortet)
+     */
     public boolean answerTieBreakQuestion(int selectedOptionId, long answerTimeMs) {
-        if (phase != GamePhase.TIE_BREAK)
-            return false;
+        if (phase != GamePhase.TIE_BREAK) return false;
 
         boolean isCorrect = currentQuestion().isCorrect(selectedOptionId);
         game.recordTieBreakAnswer(currentPlayer(), answerTimeMs, isCorrect);
 
-        // Capture state before we advance/clear per-round data
         boolean allAnsweredThisRound = game.allTieBreakPlayersAnswered();
 
-        // Award points BEFORE clearing data if all players answered
         if (allAnsweredThisRound) {
-            // Award points based on speed ranking
             awardTieBreakPoints();
         }
 
         game.nextTieBreakTurn();
 
-        // Check if we've exhausted questions or have a clear winner
         if (allAnsweredThisRound) {
             if (game.getTieBreakQuestionIndex() >= tieBreakQuestions.size() || hasWinner()) {
                 phase = GamePhase.FINISHED;
@@ -112,21 +108,14 @@ public class GameEngine {
         return allAnsweredThisRound;
     }
 
-    /**
-     * Check if there's a clear winner in tie-break (one player has won against others)
-     */
     private boolean hasWinner() {
         List<Player> tieBreakPlayers = game.getTieBreakPlayers();
-        if (tieBreakPlayers.size() <= 1) {
-            return true;
-        }
+        if (tieBreakPlayers.size() <= 1) return true;
 
-        // Sort by points descending
         List<Player> sorted = tieBreakPlayers.stream()
                 .sorted((a, b) -> b.getPoints() - a.getPoints())
                 .toList();
 
-        // If top player has more points than second, we have a winner
         return sorted.get(0).getPoints() > sorted.get(1).getPoints();
     }
 
@@ -134,24 +123,16 @@ public class GameEngine {
         var times = game.getTieBreakAnswerTimes();
         var correctness = game.getTieBreakAnswerCorrectness();
 
-        // Filter only correct answers and sort by time
         List<Player> correctPlayers = times.keySet().stream()
                 .filter(p -> correctness.getOrDefault(p, false))
                 .sorted((p1, p2) -> Long.compare(times.get(p1), times.get(p2)))
                 .toList();
 
-        // Award points: 2 for fastest, 1 for second fastest, 0 for others
-        if (correctPlayers.size() >= 1) {
-            scoreService.awardPoints(correctPlayers.get(0), 2);
-        }
-        if (correctPlayers.size() >= 2) {
-            scoreService.awardPoints(correctPlayers.get(1), 1);
-        }
-        // Others get 0 points (no action needed)
+        if (correctPlayers.size() >= 1) scoreService.awardPoints(correctPlayers.get(0), 2);
+        if (correctPlayers.size() >= 2) scoreService.awardPoints(correctPlayers.get(1), 1);
     }
 
     public boolean allTieBreakPlayersAnswered() {
         return game.allTieBreakPlayersAnswered();
     }
-
 }

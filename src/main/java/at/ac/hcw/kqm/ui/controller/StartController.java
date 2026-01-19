@@ -64,7 +64,7 @@ public class StartController {
         }
 
         System.out.println("Game starting with " + playerNames.size() + " players");
-        // Zuerst JokerRules für 8 Sekunden anzeigen, dann zur SongSelection
+        //Show Joker rules screen, then continue to song selection via button
         SceneManager.get().showJokerRules();
     }
 }
