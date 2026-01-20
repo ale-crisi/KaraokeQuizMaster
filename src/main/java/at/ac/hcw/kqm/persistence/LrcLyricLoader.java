@@ -6,24 +6,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Lädt synchronisierte Songtexte aus LRC-Dateien
- * (als Ressourcen im Classpath).
- * LRC-Format: [mm:ss.xx]Text
- * Beispiel:
- * [00:12.50]Erste Zeile
- * [00:17.30]Zweite Zeile
+ * Liest LRC-Dateien aus dem Classpath und wandelt sie in Zeit+Text-Zeilen um.
+ * Format: [mm:ss]Text oder [mm:ss.xx]Text oder [mm:ss.xxx]Text
  */
-
 public class LrcLyricLoader {
 
-    /**
-     * Represents a single timed lyric line.
-     */
+    /** Eine Zeile mit Startzeit (ms) und Text. */
     public static class TimedLine {
         public final long timeMs;
         public final String text;
@@ -34,97 +28,83 @@ public class LrcLyricLoader {
         }
     }
 
-    // Pattern for LRC timestamp: [mm:ss.xx] or [m:ss.xxx]
+    // Zeitstempel: [mm:ss] oder [mm:ss.xx] oder [mm:ss.xxx]
     private static final Pattern TIME_TAG =
             Pattern.compile("\\[(\\d{1,2}):(\\d{2})(?:\\.(\\d{1,3}))?\\]");
 
-    /**
-     * Loads lyrics from a classpath resource.
-     *
-     * @param classpathResource Path like "/at/ac/hcw/kqm/ui/fxml/assets/lyrics/Song.lrc"
-     * @return List of timed lines, sorted by timestamp
-     * @throws RuntimeException if file not found or cannot be read
-     */
+    /** Lädt eine LRC-Datei als Resource (z.B. "/.../lyrics/song.lrc"). */
     public List<TimedLine> loadFromClasspath(String classpathResource) {
         if (classpathResource == null || classpathResource.isBlank()) {
             return List.of();
         }
 
-        try (InputStream is = getClass().getResourceAsStream(classpathResource)) {
+        try (InputStream is = LrcLyricLoader.class.getResourceAsStream(classpathResource)) {
             if (is == null) {
-                System.err.println("[LrcLoader] Resource not found: " + classpathResource);
+                System.err.println("[LrcLoader] Resource nicht gefunden: " + classpathResource);
                 return List.of();
             }
             return parse(is);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read lyrics: " + classpathResource, e);
+            throw new RuntimeException("Lyrics konnten nicht gelesen werden: " + classpathResource, e);
         }
     }
 
-    /**
-     * Parses an LRC file from InputStream.
-     */
+    /** Parst den InputStream und erzeugt eine sortierte Liste aus TimedLines. */
     private List<TimedLine> parse(InputStream is) throws IOException {
-        List<TimedLine> out = new ArrayList<>();
+        List<TimedLine> result = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                line = line.strip();
+            String rawLine;
+
+            while ((rawLine = br.readLine()) != null) {
+                String line = rawLine.strip();
                 if (line.isEmpty()) continue;
 
-                // Skip metadata tags like [ar:Artist], [ti:Title], [al:Album]
+                // Metadaten ignorieren (z.B. [ar:...], [ti:...], [al:...])
                 if (line.matches("\\[[a-zA-Z]+:.*\\]")) continue;
 
-                // Extract all timestamps from the line
-                Matcher m = TIME_TAG.matcher(line);
-                List<Long> times = new ArrayList<>();
-                int lastEnd = 0;
+                Matcher matcher = TIME_TAG.matcher(line);
 
-                while (m.find()) {
-                    times.add(parseToMs(m.group(1), m.group(2), m.group(3)));
-                    lastEnd = m.end();
+                // Alle Zeitstempel in der Zeile sammeln (manche LRC-Zeilen haben mehrere)
+                List<Long> times = new ArrayList<>();
+                int lastEnd = -1;
+
+                while (matcher.find()) {
+                    long ms = toMillis(matcher.group(1), matcher.group(2), matcher.group(3));
+                    times.add(ms);
+                    lastEnd = matcher.end();
                 }
 
                 if (times.isEmpty()) continue;
 
-                // Text after all timestamps
-                String text = line.substring(lastEnd).strip();
+                // Text steht nach dem letzten Zeitstempel
+                String text = (lastEnd >= 0) ? line.substring(lastEnd).strip() : "";
                 if (text.isEmpty()) text = " ";
 
-                // Add entry for each timestamp (some LRC lines have multiple times)
-                for (Long t : times) {
-                    out.add(new TimedLine(t, text));
+                for (long t : times) {
+                    result.add(new TimedLine(t, text));
                 }
             }
         }
 
-        // Sort by timestamp
-        out.sort((a, b) -> Long.compare(a.timeMs, b.timeMs));
-        return out;
+        // Nach Startzeit sortieren
+        result.sort(Comparator.comparingLong(a -> a.timeMs));
+        return result;
     }
 
-    /**
-     * Converts LRC timestamp to milliseconds.
-     *
-     * @param mm Minutes (1-2 digits)
-     * @param ss Seconds (2 digits)
-     * @param frac Fractional seconds (1-3 digits, can be null)
-     * @return Total milliseconds
-     */
-    private long parseToMs(String mm, String ss, String frac) {
+    /** Wandelt mm:ss(.fff) in Millisekunden um. */
+    private long toMillis(String mm, String ss, String frac) {
         int minutes = Integer.parseInt(mm);
         int seconds = Integer.parseInt(ss);
 
         int millis = 0;
         if (frac != null) {
-            if (frac.length() == 1) {
-                millis = Integer.parseInt(frac) * 100;   // .5 = 500ms
-            } else if (frac.length() == 2) {
-                millis = Integer.parseInt(frac) * 10;     // .50 = 500ms
-            } else {
-                millis = Integer.parseInt(frac);          // .500 = 500ms
-            }
+            // 1 Stelle: .5  -> 500ms
+            // 2 Stellen: .50 -> 500ms
+            // 3 Stellen: .500 -> 500ms
+            if (frac.length() == 1) millis = Integer.parseInt(frac) * 100;
+            else if (frac.length() == 2) millis = Integer.parseInt(frac) * 10;
+            else millis = Integer.parseInt(frac);
         }
 
         return minutes * 60_000L + seconds * 1_000L + millis;

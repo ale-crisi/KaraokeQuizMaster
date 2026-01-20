@@ -29,7 +29,6 @@ public class JokerRulesController {
             e.printStackTrace();
         }
 
-        // Nur durch Button-Klick weitergehen, keine automatische Weiterleitung
     }
 
     @FXML

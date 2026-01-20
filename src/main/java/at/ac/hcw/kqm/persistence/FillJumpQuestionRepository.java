@@ -23,10 +23,10 @@ public class FillJumpQuestionRepository {
 
     private void initializeFillJumpQuestions() {
         // ========== SONG 1: Simarik by Tarkan ==========
-        Question fj1 = new Question(101, 1, "Vervollständige den Refrain: 'Simarik, simarik ___'", 1,
-                "Der Refrain wiederholt sich");
+        Question fj1 = new Question(101, 1, "Vervollständige: 'Kaderim puskullu belam, Yakalarsam___'", 1,
+                "Danach kommt der bekannteste Hook des Songs (zweimal gleich)");
         fj1.addAnswerOption(new AnswerOption(1, "simarik"));
-        fj1.addAnswerOption(new AnswerOption(2, "seviyorum"));
+        fj1.addAnswerOption(new AnswerOption(2, "kiss kiss"));
         fj1.addAnswerOption(new AnswerOption(3, "gülüm"));
         fj1.addAnswerOption(new AnswerOption(4, "hoşça"));
         fillJumpQuestions.add(fj1);
@@ -113,12 +113,6 @@ public class FillJumpQuestionRepository {
         fillJumpQuestions.add(fj10);
     }
 
-    /**
-     * Gets a Fill & Jump question for a specific song.
-     *
-     * @param songId The ID of the song
-     * @return A Fill & Jump question for the song, or null if not found
-     */
     public Question getQuestionForSong(int songId) {
         return fillJumpQuestions.stream()
                 .filter(q -> q.getSongId() == songId)
@@ -126,11 +120,6 @@ public class FillJumpQuestionRepository {
                 .orElse(null);
     }
 
-    /**
-     * Gets all Fill & Jump questions.
-     *
-     * @return List of all Fill & Jump questions
-     */
     public List<Question> getAllQuestions() {
         return new ArrayList<>(fillJumpQuestions);
     }

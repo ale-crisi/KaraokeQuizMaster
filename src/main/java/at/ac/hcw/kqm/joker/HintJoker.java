@@ -4,11 +4,7 @@ import at.ac.hcw.kqm.model.Question;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-/**
- * Hint-Joker: Zeigt einen hilfreichen Hinweis
- * zur aktuellen Frage an.
- */
-
+//Hint Joker: Zeigt einen Hinweis.
 public class HintJoker implements Joker {
 
     @Override

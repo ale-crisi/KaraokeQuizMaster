@@ -42,7 +42,7 @@ public class JokerFiftyController {
         setAnswerButton(answerC, opts.size() > 2 ? opts.get(2) : null);
         setAnswerButton(answerD, opts.size() > 3 ? opts.get(3) : null);
 
-        // Apply Fifty-Fifty joker effect
+        //Fifty-Fifty joker effect
         Button[] buttons = { answerA, answerB, answerC, answerD };
         fiftyFiftyJoker.apply(currentQuestion, buttons, questionLabel);
 
@@ -79,7 +79,6 @@ public class JokerFiftyController {
         Object userData = b.getUserData();
         if (userData instanceof Integer id) {
             selectedOptionId = id;
-            // Zeige visuelles Feedback: alle Buttons mit der Antwort-Rückmeldung färben
             showAnswerFeedback();
             // Auto-submit nach kurzer Verzögerung damit der User die Farben sieht
             javafx.animation.PauseTransition pause = new javafx.animation.PauseTransition(javafx.util.Duration.millis(800));

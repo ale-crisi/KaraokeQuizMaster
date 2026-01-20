@@ -30,14 +30,7 @@ public class Song {
         this.audioFilePath = "";
     }
 
-    /**
-     * Constructor with availability status.
-     *
-     * @param id          Unique identifier for the song
-     * @param title       The song's title
-     * @param artist      The artist who performs the song
-     * @param isAvailable Whether the song is unlocked
-     */
+
     public Song(int id, String title, String artist, boolean isAvailable) {
         this.id = id;
         this.title = title;
@@ -108,11 +101,7 @@ public class Song {
         this.lyricsFilePath = lyricsFilePath;
     }
 
-    /**
-     * Gets a display string for the song list.
-     *
-     * @return Formatted string: "Title - Artist"
-     */
+
     public String getDisplayName() {
         return title + " - " + artist;
     }

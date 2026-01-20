@@ -1,22 +1,30 @@
 package at.ac.hcw.kqm.model;
 
 /**
- * Enum representing the different types of jokers (lifelines) available in the game.
- * Each player can use each joker type once per game.
+ * Beschreibt die verschiedenen Joker-Arten, die im Spiel verwendet werden können.
+ * Joker unterstützen den Spieler beim Beantworten einer Frage
+ * und können pro Spieler bzw. pro Frage nur einmal eingesetzt werden.
  */
 public enum JokerType {
+
     /**
-     * Fifty-Fifty: Removes two incorrect answer options, leaving only two choices.
+     * 50/50-Joker:
+     * Entfernt zwei falsche Antwortmöglichkeiten,
+     * sodass nur noch eine richtige und eine falsche Antwort übrig bleiben.
      */
     FIFTY_FIFTY,
 
     /**
-     * Hint: Provides a helpful hint or additional information about the question.
+     * Hinweis-Joker:
+     * Zeigt einen zusätzlichen Hinweis zur aktuellen Frage an,
+     * der dem Spieler bei der Beantwortung helfen soll.
      */
     HINT,
 
     /**
-     * Fill and Jump: Skips the current question and replaces it with a new one.
+     * Fragenwechsel-Joker (Fill & Jump):
+     * Ersetzt die aktuelle Frage durch eine andere Multiple-Choice-Frage.
+     * Die neue Frage wird anstelle der ursprünglichen gespielt.
      */
     FILL_AND_JUMP
 }

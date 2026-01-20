@@ -5,12 +5,15 @@ import at.ac.hcw.kqm.model.JokerType;
 import at.ac.hcw.kqm.model.Player;
 import at.ac.hcw.kqm.model.Question;
 import at.ac.hcw.kqm.model.Song;
-import at.ac.hcw.kqm.persistence.*;
+import at.ac.hcw.kqm.persistence.FillJumpQuestionRepository;
+import at.ac.hcw.kqm.persistence.InMemoryQuestionRepository;
+import at.ac.hcw.kqm.persistence.InMemorySongRepository;
+import at.ac.hcw.kqm.persistence.QuestionRepository;
+import at.ac.hcw.kqm.persistence.SongRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 public class AppState {
 
@@ -110,41 +113,31 @@ public class AppState {
     // Game
     public void startQuizGame() {
         List<Question> all = new ArrayList<>();
+
         // Build 5 questions for EACH player's selected song separately
         for (int i = 0; i < players.size(); i++) {
             Song song = selectedSongs.get(i);
             List<Question> qs = questionRepo.getQuestionsBySongId(song.getId());
-            // Exclude Fill&Jump lyric completion questions from the normal pool
-            List<Question> normal = qs.stream()
-                    .filter(q -> !isFillJumpQuestion(q))
-                    .toList();
 
-            List<Question> source = normal.isEmpty() ? qs : normal;
+            // No special filtering by question text; use all questions as normal pool.
+            List<Question> source = qs;
+
             List<Question> five = new ArrayList<>();
             int count = Math.min(5, source.size());
             for (int j = 0; j < count; j++) {
                 five.add(source.get(j));
             }
+
             // Fill up to 5 if not enough questions
             for (int j = count; j < 5; j++) {
                 five.add(source.get(j % source.size()));
             }
+
             all.addAll(five);
         }
+
         System.out.println("Total questions loaded: " + all.size() + " for " + players.size() + " players");
         engine.startGame(players, all);
-    }
-
-    private boolean isFillJumpQuestion(Question q) {
-        String t = q.getQuestionText();
-        if (t == null)
-            return false;
-        String lower = t.toLowerCase();
-        // Nur Liedtext-Vervollständigungen filtern, nicht allgemeine
-        // "Vervollständige"-Fragen
-        return (lower.contains("vervollständige den text") || lower.contains("vervollstaendige den text")
-                || lower.contains("vervollständige den liedtext") || lower.contains("vervollstaendige den liedtext")
-                || lower.contains("vervollständige: \"") || lower.contains("vervollstaendige: \""));
     }
 
     public GameEngine getEngine() {

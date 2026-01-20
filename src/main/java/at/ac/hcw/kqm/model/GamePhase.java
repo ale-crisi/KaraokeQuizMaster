@@ -1,23 +1,33 @@
 package at.ac.hcw.kqm.model;
 
+/**
+ * Beschreibt den aktuellen Zustand (Phase) des Spiels.
+ * Die Phase wird in der Engine genutzt, um zu steuern, welche Aktionen gerade erlaubt sind
+ * (z.B. normale Fragen beantworten, Tie-Break spielen, Ergebnis anzeigen).
+ */
 public enum GamePhase {
+
     /**
-     * NOT_STARTED it is running, but not started yet
+     * Das Spiel wurde noch nicht gestartet.
+     * Es gibt noch keine laufende Fragerunde.
      */
     NOT_STARTED,
 
     /**
-     * ASKING_QUESTION it is asking Questions to a player
+     * Normale Spielphase: Es werden Fragen gestellt und beantwortet,
+     * und Punkte werden vergeben.
      */
     ASKING_QUESTION,
 
     /**
-     * TIE_BREAK starts a tie-break if there is one
+     * Tie-Break-Phase: Wird verwendet, wenn nach der normalen Spielphase ein Gleichstand besteht.
+     * In dieser Phase spielen nur die Spieler im Gleichstand.
      */
     TIE_BREAK,
 
     /**
-     * FINISHED the game is done
+     * Das Spiel ist beendet. Es werden keine weiteren Fragen gestellt.
+     * In dieser Phase kann z.B. das Endergebnis angezeigt werden.
      */
     FINISHED
 }
