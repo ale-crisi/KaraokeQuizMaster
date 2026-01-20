@@ -8,17 +8,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * In-memory implementation of QuestionRepository.
- * Stores questions that are specifically related to karaoke songs.
+ * In-Memory-Implementierung des QuestionRepository.
+ * Speichert Quizfragen, die jeweils einem bestimmten Song zugeordnet sind.
  *
- * WORKFLOW:
- * 1. Player chooses a song from the song list
- * 2. System retrieves questions for that specific song using
- * getQuestionsBySongId()
- * 3. Player answers questions about the chosen song
+ * Ablauf:
+ * 1. Der Spieler wählt einen Song aus.
+ * 2. Das System lädt die passenden Fragen über getQuestionsBySongId().
+ * 3. Der Spieler beantwortet die Fragen zu diesem Song.
  *
- * DATA: Contains 30 questions for 10 different songs (3 questions per song)
+ * Daten:
+ * Enthält 30 Fragen für 10 verschiedene Songs.
  */
+
 public class InMemoryQuestionRepository implements QuestionRepository {
 
     private List<Question> questions;

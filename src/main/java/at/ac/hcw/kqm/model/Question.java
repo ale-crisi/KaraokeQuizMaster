@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a quiz question in the Karaoke Quiz Master game.
- * Each question is specifically related to ONE song.
- * After a player chooses a song, they answer questions about that song.
+ * Repräsentiert eine Quizfrage im Karaoke Quiz Master Spiel.
+ * Jede Frage ist genau einem Song zugeordnet.
+ * Nach der Songauswahl beantwortet der Spieler
+ * Fragen zu diesem Song.
  */
+
 public class Question {
     private int id;
     private int songId; // REQUIRED: Every question must be linked to a song

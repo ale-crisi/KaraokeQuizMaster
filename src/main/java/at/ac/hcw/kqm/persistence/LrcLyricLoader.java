@@ -11,13 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Loads synchronized lyrics from LRC files (classpath resources).
- * LRC Format: [mm:ss.xx]Lyric text
- *
- * Example:
- * [00:12.50]First line
- * [00:17.30]Second line
+ * Lädt synchronisierte Songtexte aus LRC-Dateien
+ * (als Ressourcen im Classpath).
+ * LRC-Format: [mm:ss.xx]Text
+ * Beispiel:
+ * [00:12.50]Erste Zeile
+ * [00:17.30]Zweite Zeile
  */
+
 public class LrcLyricLoader {
 
     /**

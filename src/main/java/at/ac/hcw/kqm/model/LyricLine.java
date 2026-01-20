@@ -1,8 +1,11 @@
 package at.ac.hcw.kqm.model;
 
 /**
- * Represents a single line of lyrics with its start time in milliseconds.
+ * Repräsentiert eine einzelne Zeile eines Songtexts.
+ * Speichert den Text der Zeile und den Zeitpunkt,
+ * ab dem sie angezeigt werden soll.
  */
+
 public class LyricLine {
     private long startTime;  // Time in milliseconds when this line should appear
     private String text;     // The lyrics text for this line

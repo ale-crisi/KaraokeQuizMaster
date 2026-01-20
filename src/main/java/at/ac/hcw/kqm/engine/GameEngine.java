@@ -6,6 +6,13 @@ import at.ac.hcw.kqm.model.Player;
 import at.ac.hcw.kqm.model.Question;
 
 import java.util.List;
+/**
+ * Steuert den Ablauf des Spiels und verbindet
+ * Spiellogik, Punkteberechnung und Spielphasen.
+ * Verarbeitet Antworten, wechselt Spielzustände
+ * und behandelt den Tie-Break-Fall.
+ */
+
 
 public class GameEngine {
 

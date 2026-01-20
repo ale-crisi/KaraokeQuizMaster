@@ -1,19 +1,21 @@
 package at.ac.hcw.kqm.model;
+/**
+ * Repräsentiert eine einzelne Antwortmöglichkeit für eine Quizfrage.
+ * Jede Antwortmöglichkeit hat eine eindeutige ID und einen Text.
+
+ * Attribute:
+ * private int id;
+ * private String text;
+
+ * Konstruktor:
+ * Erstellt eine neue Antwortmöglichkeit.
+ */
 
 public class AnswerOption {
 
     private int id;
     private String text;
-    /**
-     * Represents a single answer option for a quiz question.
-     * Each option has an ID and text content.
-     * <p>
-     * private int id;
-     * private String text;
-     * <p>
-     * /**
-     * Constructor to create a new answer option.
-     */
+
     public AnswerOption(int id, String text) {
         this.id = id;
         this.text = text;

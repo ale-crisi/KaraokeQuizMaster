@@ -5,11 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Fill & Jump Joker: Replaces the current question with a lyric completion
- * question.
- * This joker is used to get a different question, typically a
- * "Vervollständige..." type.
+ * Fill-&-Jump-Joker: Ersetzt die aktuelle Frage
+ * durch eine Lückentext-Frage aus dem Songtext.
+ * Dieser Joker wird verwendet, um eine andere Frage zu erhalten,
+ * meist vom Typ „Vervollständige …“.
  */
+
 public class Fill_JumpJoker implements Joker {
 
     @Override

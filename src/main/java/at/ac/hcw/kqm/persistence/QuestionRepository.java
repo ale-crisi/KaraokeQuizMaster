@@ -5,9 +5,11 @@ import at.ac.hcw.kqm.model.Question;
 import java.util.List;
 
 /**
- * Interface for accessing quiz questions.
- * Defines methods for retrieving questions from a data source.
+ * Interface für den Zugriff auf Quizfragen.
+ * Definiert Methoden zum Laden von Fragen
+ * aus einer Datenquelle.
  */
+
 public interface QuestionRepository {
 
     /**

@@ -4,10 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Steuert den Spielablauf und speichert den aktuellen Spielzustand.
+ * Bestimmt den aktuellen Spieler, die aktuelle Frage
+ * und behandelt den Tie-Break bei Gleichstand.
+ */
+
 public class Game {
 
-    private List<Player> players;
-    private List<Question> questions;
+    private List<Player> players; //Liste aller Spieler, die mitspielen.
+    private List<Question> questions; //Liste der Fragen, die im Spiel verwendet werden
     private List<Player> tieBreakPlayers;
 
     private int tieBreakIndex = 0;

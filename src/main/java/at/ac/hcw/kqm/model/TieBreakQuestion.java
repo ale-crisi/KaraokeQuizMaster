@@ -1,11 +1,11 @@
 package at.ac.hcw.kqm.model;
 
 /**
- * Represents a tie-break question in the Karaoke Quiz Master game.
- * Used when multiple players have the same score at the end of the regular
- * quiz.
- * Tie-break questions are used to determine a winner.
+ * Repräsentiert eine Tie-Break-Frage im Karaoke Quiz Master Spiel.
+ * Sie wird verwendet, wenn mehrere Spieler am Ende
+ * die gleiche Punktzahl haben, um einen Gewinner zu bestimmen.
  */
+
 public class TieBreakQuestion extends Question {
 
     /**

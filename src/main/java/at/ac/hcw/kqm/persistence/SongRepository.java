@@ -5,9 +5,11 @@ import at.ac.hcw.kqm.model.Song;
 import java.util.List;
 
 /**
- * Interface for accessing songs.
- * Defines methods for retrieving songs from a data source.
+ * Interface für den Zugriff auf Songs.
+ * Definiert Methoden zum Laden von Songs
+ * aus einer Datenquelle.
  */
+
 public interface SongRepository {
 
     /**

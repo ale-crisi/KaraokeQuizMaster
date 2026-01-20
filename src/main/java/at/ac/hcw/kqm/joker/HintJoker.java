@@ -5,8 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Hint Joker: Displays a helpful hint for the current question.
+ * Hint-Joker: Zeigt einen hilfreichen Hinweis
+ * zur aktuellen Frage an.
  */
+
 public class HintJoker implements Joker {
 
     @Override

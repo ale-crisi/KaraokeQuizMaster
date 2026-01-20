@@ -4,30 +4,36 @@ import at.ac.hcw.kqm.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- * Service class for score calculation and ranking logic.
- * Handles player scoring, ranking, and tie detection.
+ * Service-Klasse für Punkteberechnung und Ranglistenlogik.
+ * Verwaltet die Punkte der Spieler,
+ * die Rangfolge und erkennt Punktegleichstände.
  */
+
 public class ScoreService {
 
     /**
-     * Awards points to a player for a correct answer.
+     * Vergibt Punkte an einen Spieler
+     * für eine richtige Antwort.
      *
-     * @param player The player to award points to
-     * @param points Number of points to award
+     * @param player Der Spieler, der Punkte erhält
+     * @param points Anzahl der zu vergebenden Punkte
      */
+
     public void awardPoints(Player player, int points) {
         player.addPoints(points);
     }
 
     /**
-     * Calculates and returns the player ranking based on points.
-     * Players are sorted in descending order by score.
+     * Berechnet und gibt die Rangliste der Spieler
+     * basierend auf ihren Punkten zurück.
+     * Die Spieler werden absteigend nach Punktzahl sortiert.
      *
-     * @param players List of players to rank
-     * @return Sorted list with highest scoring players first
+     * @param players Liste der zu sortierenden Spieler
+     * @return Sortierte Liste mit den Spielern
+     *         mit der höchsten Punktzahl zuerst
      */
+
     public List<Player> calculateRanking(List<Player> players) {
         List<Player> ranking = new ArrayList<>(players);
         ranking.sort((a, b) -> b.getPoints() - a.getPoints());
@@ -35,11 +41,14 @@ public class ScoreService {
     }
 
     /**
-     * Checks if there is a tie between the top players.
+     * Prüft, ob es einen Gleichstand
+     * zwischen den besten Spielern gibt.
      *
-     * @param players List of players to check
-     * @return true if at least two players share the highest score
+     * @param players Liste der zu prüfenden Spieler
+     * @return true, wenn mindestens zwei Spieler
+     *         die höchste Punktzahl teilen
      */
+
     public boolean hasTie(List<Player> players) {
         if (players.size() < 2) {
             return false;
@@ -59,11 +68,13 @@ public class ScoreService {
     }
 
     /**
-     * Returns all players who share the highest score.
+     * Gibt alle Spieler zurück,
+     * die die höchste Punktzahl erreicht haben.
      *
-     * @param players List of players
-     * @return List of tied players with top score
+     * @param players Liste der Spieler
+     * @return Liste der Spieler mit der höchsten Punktzahl
      */
+
     public List<Player> getTiedPlayers(List<Player> players) {
         List<Player> ranking = calculateRanking(players);
         int topScore = ranking.get(0).getPoints();
@@ -80,11 +91,6 @@ public class ScoreService {
         return tied;
     }
 
-    /**
-     * Resets all player scores to zero.
-     *
-     * @param players List of players to reset
-     */
     public void resetScores(List<Player> players) {
         for (Player p : players) {
             p.setPoints(0);

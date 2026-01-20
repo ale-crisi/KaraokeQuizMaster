@@ -9,10 +9,12 @@ import java.util.List;
 public class TieBreakManager {
 
     /**
-     * Provides a single programming-themed multiple choice question
-     * used for the tie-break. All players with top score answer one after another
-     * and the one with the shortest time wins.
+     * Stellt eine einzelne Multiple-Choice-Frage mit Programmier-Thema
+     * für den Tie-Break bereit.
+     * Alle Spieler mit der höchsten Punktzahl beantworten sie nacheinander,
+     * und der Spieler mit der kürzesten Antwortzeit gewinnt.
      */
+
     public List<Question> getProgrammingQuestions() {
         List<Question> list = new ArrayList<>();
 

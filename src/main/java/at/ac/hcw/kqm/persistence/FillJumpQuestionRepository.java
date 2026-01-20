@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Repository for Fill & Jump Joker questions.
- * These are lyric completion questions where a word from the song's chorus is missing.
+ * Repository für Fill-&-Jump-Joker-Fragen.
+ * Diese Fragen sind Lückentext-Fragen,
+ * bei denen ein Wort aus dem Refrain des Songs fehlt.
  */
+
 public class FillJumpQuestionRepository {
 
     private List<Question> fillJumpQuestions;

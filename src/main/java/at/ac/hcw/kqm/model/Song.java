@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a song in the Karaoke Quiz Master game.
- * Each song has an ID, title, artist, and availability status.
+ * Repräsentiert einen Song im Karaoke Quiz Master Spiel.
+ * Jeder Song hat eine ID, einen Titel,
+ * einen Künstler und einen Verfügbarkeitsstatus.
  */
+
 public class Song {
     private int id;
     private String title;

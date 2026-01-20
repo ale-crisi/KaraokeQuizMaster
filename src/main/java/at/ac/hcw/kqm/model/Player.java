@@ -1,8 +1,10 @@
 package at.ac.hcw.kqm.model;
 /**
- * Represents a player in the Karaoke Quiz Master game.
- * Stores player information including name, points, game state, and joker usage.
+ * Repräsentiert einen Spieler im Karaoke Quiz Master Spiel.
+ * Speichert Informationen wie Name, Punkte,
+ * Spielstatus und verwendete Joker.
  */
+
 public class Player {
     private int id;
     private String name;

@@ -7,10 +7,10 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 /**
- * Fifty-Fifty Joker: Removes two incorrect answer options.
+ * Fifty-Fifty-Joker: Entfernt zwei falsche Antwortmöglichkeiten.
  */
+
 public class FiftyFiftyJoker implements Joker {
 
     @Override

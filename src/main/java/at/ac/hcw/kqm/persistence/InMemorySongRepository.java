@@ -5,6 +5,15 @@ import at.ac.hcw.kqm.model.Song;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+/**
+ * In-Memory-Implementierung des SongRepository.
+ * Speichert alle Songs im Arbeitsspeicher und stellt sie
+ * der Anwendung zur Verfügung.
+ *
+ * Die Songs werden beim Start initialisiert.
+ * Zusätzlich können Songtexte aus LRC-Dateien geladen
+ * und dem jeweiligen Song zugeordnet werden.
+ */
 
 
 public class InMemorySongRepository implements SongRepository {
