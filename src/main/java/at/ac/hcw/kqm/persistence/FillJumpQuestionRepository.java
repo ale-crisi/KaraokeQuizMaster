@@ -25,8 +25,8 @@ public class FillJumpQuestionRepository {
         // ========== SONG 1: Simarik by Tarkan ==========
         Question fj1 = new Question(101, 1, "Vervollständige: 'Kaderim puskullu belam, Yakalarsam___'", 1,
                 "Danach kommt der bekannteste Hook des Songs (zweimal gleich)");
-        fj1.addAnswerOption(new AnswerOption(1, "simarik"));
-        fj1.addAnswerOption(new AnswerOption(2, "kiss kiss"));
+        fj1.addAnswerOption(new AnswerOption(1, "kiss kiss"));
+        fj1.addAnswerOption(new AnswerOption(2, "Simarik"));
         fj1.addAnswerOption(new AnswerOption(3, "gülüm"));
         fj1.addAnswerOption(new AnswerOption(4, "hoşça"));
         fillJumpQuestions.add(fj1);
