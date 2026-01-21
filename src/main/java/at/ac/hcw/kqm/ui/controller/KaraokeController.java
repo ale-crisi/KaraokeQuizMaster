@@ -12,7 +12,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 
-import java.io.File;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.List;
@@ -306,14 +305,6 @@ public class KaraokeController {
         clipRect.setWidth(0);
     }
 
-    /**
-     * Binary search to find the current lyric line based on playback time.
-     * Returns the index of the last line whose startTime <= currentTimeMs.
-     *
-     * @param lines Sorted list of lyric lines
-     * @param currentTimeMs Current playback time in milliseconds
-     * @return Index of current line, or -1 if none
-     */
     private int findCurrentLyricIndex(List<LyricLine> lines, long currentTimeMs) {
         if (lines.isEmpty()) return -1;
 

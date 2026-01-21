@@ -7,8 +7,8 @@ package at.ac.hcw.kqm.model;
  */
 
 public class LyricLine {
-    private long startTime;  // Time in milliseconds when this line should appear
-    private String text;     // The lyrics text for this line
+    private long startTime;
+    private String text;
 
     public LyricLine(long startTime, String text) {
         this.startTime = startTime;
